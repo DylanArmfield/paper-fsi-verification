@@ -36,7 +36,9 @@ The fluid side follows the solids4foam FSI1 verification (`TurekHron2006/verific
 - **Evaluation:**
   - Point A comes from a preCICE watch-point at (0.6, 0.2).
   - Drag and lift come from `forces` on `plate` + `cylinder`, divided by 0.015 m. Only the converged (last) entry of each time step is used.
-  - Each quantity is the mean over the closing 20 % of the run (t = 24.4–30 s). The spread there must be below 1e-3, as in the solids4foam test.
+  - Each quantity is the **mean** over the closing 20 % of the run (t = 24.4–30 s). This differs from the solids4foam FSI1 test, which reports the **final value**. The mean is used here because it averages out the step-to-step coupling noise (see the lift at 4x below).
+  - The steadiness test is the solids4foam one: the relative spread over the closing 20 % must be below 1e-3.
+  - With final values instead of means, the lift order is 1.57 (not 2.03) and the lift Richardson value 0.76365 (−0.01 % against Featflow, not −0.06 %). For u_x, u_y and drag, the orders change by at most 0.01 and the Richardson values by at most 0.002 %. The 4x final value is at t = 29.9875 s, the last completed window.
 
 ## Mesh study (fluid and solid refined together)
 
@@ -85,7 +87,7 @@ The wall-clock times include the uncoupled 0–2 s ramp (15 s at 1x, 101 s at 2x
 
 † 4x: the time from start to the last completed window (t = 29.9875 s): 227 s ramp + 7 857 s coupled (`ClockTime` in the fluid log). The final window ended in the CalculiX abort described under Notes. The total in `logs/level4/log.run` (30 150 s) also includes about 6 h in which the aborted solver process hung before it was killed, and is not the cost.
 
-The largest spread over the closing 20 % is in the lift: about 5e-4 on all 1x and 2x runs, and 1.9e-3 at 4x. At 4x this is a ±0.1 % step-to-step coupling noise at the 1e-6 tolerance, not drift. The 1 s means of the lift over t = 20–30 s agree to 7e-6, so the tabulated 4x mean is converged in time to the digits shown. The solids4foam p = 3 4x run shows the same kind of lift fluctuation. The displacement spreads are at most 1.1e-5.
+The largest spread over the closing 20 % is in the lift: about 5e-4 on all 1x and 2x runs, and 1.9e-3 at 4x. **The 4x run therefore fails the 1e-3 steadiness test in the lift.** Every other quantity on every run passes it. At 4x the lift spread is a ±0.1 % step-to-step coupling noise at the 1e-6 tolerance, not drift. The 1 s means of the lift over t = 20–30 s agree to 7e-6, so the tabulated 4x mean is converged in time to the digits shown. The solids4foam p = 3 4x run shows the same kind of lift fluctuation. The displacement spreads are at most 1.1e-5.
 
 ## Notes
 
