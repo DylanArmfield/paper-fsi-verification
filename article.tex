@@ -107,6 +107,12 @@ textheight=24cm, % llncs has 19.3cm
   \newcommand{\suppFigBoth}{Figures~\ref{fig:ring_febio_decay} and~\ref{fig:ring_febio_traction}}
 \fi
 
+% Run-in \paragraph headings: bold, with the text continuing on the same line
+% (the sn-jnl default sets them on their own line with extra space). The
+% headings carry their own full stop.
+\renewcommand\paragraph[1]{\par\addvspace{1.2ex plus .4ex minus .2ex}%
+	\noindent{\normalfont\bfseries #1}\hspace{0.5em}\ignorespaces}
+
 \begin{document}
 
 \title[Verification benchmarks for fluid--solid interaction]{Benchmark problems are not benchmark solutions: an open verification suite for continuum fluid--solid interaction with quantified numerical uncertainty}
