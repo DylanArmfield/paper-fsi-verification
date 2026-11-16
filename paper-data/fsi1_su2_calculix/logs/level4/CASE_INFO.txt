@@ -1,0 +1,1 @@
+fluid level 4 (fsi1_L4.su2), solid level 4: 420x24 C3D8I (10080 elements, 865 interface points), depth 1.0 m, dt 0.0125 s, inner iter 200, inner minval -9.0, steady iter 20000

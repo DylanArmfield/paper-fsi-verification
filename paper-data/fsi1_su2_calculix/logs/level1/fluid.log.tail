@@ -1,0 +1,40 @@
+---[precice]  Mapping "Force" for t=27.975 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Time window completed
+---[precice]  Mapping "Displacement" for t=27.975 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 1 (min: 1, max: 50), time-window 1120, t 27.975 (max: 28), Dt 0.025, max-dt 0.02499999999999858
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1121|  2.8000e+01|           0|   -7.627072|   -7.962648|   -8.025120|   14.078123|    0.782957|
+|        1121|  2.8000e+01|           6|   -9.011785|   -9.450462|  -10.061556|   14.078124|    0.782924|
+---[precice]  Mapping "Force" for t=28 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=28 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 2 (min: 1, max: 50), time-window 1120, t 27.975 (max: 28), Dt 0.025, max-dt 0.02499999999999858
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1121|  2.8000e+01|           0|   -8.050098|   -8.009563|   -8.026987|   14.078123|    0.782985|
+|        1121|  2.8000e+01|           4|   -9.089899|   -9.394826|   -9.562981|   14.078123|    0.783003|
+---[precice]  Mapping "Force" for t=28 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Time window completed
+---[precice]  Mapping "Displacement" for t=28 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  Reached end at: final time-window: 1120, final time: 28
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterface container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted nInst container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
+---[precice]  Close communication channels

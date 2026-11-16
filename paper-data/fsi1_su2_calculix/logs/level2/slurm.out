@@ -1,0 +1,7 @@
+Job 850 (fsi1-L2)  host lugh  CPUs 1  tasks 13  mem 32768 MB  GPU none  start 2026-11-14T17:26:20+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/fsi1-su2-calculix/cases/L2  stage all  steady ranks 13  coupled: SU2 ranks 12 + CalculiX 1
+fluid level 2 (fsi1_L2.su2), solid level 2: 210x12 C3D8I (2520 elements, 433 interface points), depth 1.0 m, dt 0.025 s, inner iter 200, inner minval -9.0, steady iter 20000
+stage 1 exit 0, wall 9 s, 438 history lines
+windows 1120  mean coupling its 2.36  max 17  at-cap 0
+stage 2 exit 0 (solid 0, fluid 0), wall 3642 s
+Exit 0  end 2026-11-14T18:27:11+00:00  wall 3651 s
