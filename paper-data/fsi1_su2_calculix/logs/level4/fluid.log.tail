@@ -1,0 +1,40 @@
+|        2239|  2.7975e+01|           4|   -9.013490|   -9.500806|  -10.516834|   14.189249|    0.765349|
+---[precice]  Mapping "Force" for t=27.975 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Time window completed
+---[precice]  Mapping "Displacement" for t=27.975 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 1 (min: 1, max: 50), time-window 2239, t 27.975 (max: 28), Dt 0.0125, max-dt 0.0125
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2240|  2.7987e+01|           0|   -8.940280|   -8.035881|   -8.973727|   14.189242|    0.765341|
+|        2240|  2.7987e+01|          21|   -9.003134|   -9.044833|  -10.966412|   14.189212|    0.765328|
+---[precice]  Mapping "Force" for t=27.9875 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=27.9875 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 2 (min: 1, max: 50), time-window 2239, t 27.975 (max: 28), Dt 0.0125, max-dt 0.0125
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2240|  2.7987e+01|           0|   -9.013086|   -8.035810|   -8.973720|   14.189247|    0.765342|
+|        2240|  2.7987e+01|          21|   -9.003723|   -9.045214|  -10.969643|   14.189215|    0.765338|
+---[precice]  Mapping "Force" for t=27.9875 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Time window completed
+---[precice]  Mapping "Displacement" for t=27.9875 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 1 (min: 1, max: 50), time-window 2240, t 27.9875 (max: 28), Dt 0.0125, max-dt 0.01249999999999929
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2241|  2.8000e+01|           0|   -8.883708|   -7.741790|   -8.829866|   14.189205|    0.765341|
+|        2241|  2.8000e+01|          10|   -9.024071|   -9.008661|  -11.039598|   14.189198|    0.765342|
+---[precice]  Mapping "Force" for t=28 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice] ERROR:  Receiving data from another participant (using sockets) failed with a system error: read: End of file [asio.misc:2]. This often means that the other participant exited with an error (look there).
+Traceback (most recent call last):
+  File "/scratch/users/dylan/software/SU2-7.5.1-install/bin/SU2_preCICE_FSI.py", line 257, in <module>
+    main()
+  File "/scratch/users/dylan/software/SU2-7.5.1-install/bin/SU2_preCICE_FSI.py", line 223, in main
+    participant.advance(deltaT)
+  File "cyprecice/cyprecice.pyx", line 147, in cyprecice.Participant.advance
+RuntimeError: Receiving data from another participant (using sockets) failed with a system error: read: End of file [asio.misc:2]. This often means that the other participant exited with an error (look there).
+---[precice]  Implicitly finalizing in destructor
+---[precice]  Close communication channels
+---[precice] WARNING:  Socket shutdown failed with system error: shutdown: Transport endpoint is not connected [system:107 at /usr/include/boost/asio/detail/reactive_socket_service.hpp:231 in function 'shutdown']
+mpirun: Forwarding signal 18 to job

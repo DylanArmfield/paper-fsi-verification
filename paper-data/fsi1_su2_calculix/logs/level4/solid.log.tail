@@ -1,0 +1,40 @@
+ elastic contact energy = 0.000000e+00
+ energy lost due to friction = 0.000000e+00
+ total energy  = 6.422162e-05
+
+ energy increase = 6.422162e-05
+
+ energy balance (absolute) = -1.448115e-06 
+ energy balance (relative) = 45.406104 % 
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+Adjusting time step for transient step
+precice_dt = 0.000000, ccx_dt = 0.000000 (dtheta = 0.000000, tper = 28.000000) -> dt = 0.000000 (dtheta = 0.000000)
+Adapter reading coupling data...
+
+ fatal error in ChvMananger_newObjectOfSizeNbytes(0x5f55c5e82bd0,-2126859144)
+ bad input
+Reading FORCES coupling data.
+ increment 2241 attempt 1 
+ increment size= 0.000000e+00
+ sum of previous increments=2.800000e+01
+ actual step time=2.800000e+01
+ actual total time=2.800000e+01
+
+ iteration 1
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+corrupted double-linked list
+[lugh:928591] *** Process received signal ***
+[lugh:928591] Signal: Aborted (6)
+[lugh:928591] Signal code:  (-6)
+(null): Forwarding signal 18 to job
