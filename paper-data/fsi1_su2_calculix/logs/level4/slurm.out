@@ -1,0 +1,4 @@
+Job 851 (fsi1-L4)  host lugh  CPUs 1  tasks 25  mem 65536 MB  GPU none  start 2026-11-14T18:27:41+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/fsi1-su2-calculix/cases/L4  stage all  steady ranks 25  coupled: SU2 ranks 24 + CalculiX 1
+fluid level 4 (fsi1_L4.su2), solid level 4: 420x24 C3D8I (10080 elements, 865 interface points), depth 1.0 m, dt 0.0125 s, inner iter 200, inner minval -9.0, steady iter 20000
+stage 1 exit 0, wall 71 s, 1192 history lines
