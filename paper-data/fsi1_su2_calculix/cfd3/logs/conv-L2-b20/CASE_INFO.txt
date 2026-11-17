@@ -1,0 +1,1 @@
+CFD3 level 2 (fsi1_L2.su2, 21344 cells), dt 0.001 s, t_end 10.0 s (10000 steps), BETA_FACTOR 20.0, inner iter cap 300, inner minval -9.0; restart from dev-L2-cap40 at t = 7.999 (iter 7999)

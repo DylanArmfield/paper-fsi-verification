@@ -1,0 +1,1 @@
+CFD3 level 1 (fsi1_L1.su2, 5336 cells), dt 0.001 s, t_end 0.5 s (500 steps), BETA_FACTOR 4.1, inner iter cap 1000, inner minval -9.0

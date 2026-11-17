@@ -1,0 +1,5 @@
+Job 882 (cfd3-dev-L1)  host lugh  tasks 4  mem 8192 MB  start 2026-11-16T20:54:33+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/fsi3-su2-calculix/cfd3/dev-L1-cap40
+CFD3 level 1 (fsi1_L1.su2, 5336 cells), dt 0.001 s, t_end 8.0 s (8000 steps), BETA_FACTOR 4.1, inner iter cap 40, inner minval -9.0
+time steps 8000, t_end 7.999, inner its mean 39.0 max 40
+Exit 0  end 2026-11-16T21:41:34+00:00  wall 2821 s

@@ -1,0 +1,817 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+-------------------------------------------------------------------------
+|    ___ _   _ ___                                                      |
+|   / __| | | |_  )   Release 7.5.1 "Blackbird"                         |
+|   \__ \ |_| |/ /                                                      |
+|   |___/\___//___|   Suite (Computational Fluid Dynamics Code)         |
+|                                                                       |
+-------------------------------------------------------------------------
+| SU2 Project Website: https://su2code.github.io                        |
+|                                                                       |
+| The SU2 Project is maintained by the SU2 Foundation                   |
+| (http://su2foundation.org)                                            |
+-------------------------------------------------------------------------
+| Copyright 2012-2023, SU2 Contributors                                 |
+|                                                                       |
+| SU2 is free software; you can redistribute it and/or                  |
+| modify it under the terms of the GNU Lesser General Public            |
+| License as published by the Free Software Foundation; either          |
+| version 2.1 of the License, or (at your option) any later version.    |
+|                                                                       |
+| SU2 is distributed in the hope that it will be useful,                |
+| but WITHOUT ANY WARRANTY; without even the implied warranty of        |
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU      |
+| Lesser General Public License for more details.                       |
+|                                                                       |
+| You should have received a copy of the GNU Lesser General Public      |
+| License along with SU2. If not, see <http://www.gnu.org/licenses/>.   |
+-------------------------------------------------------------------------
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+Parsing config file for zone 0
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+----------------- Physical Case Definition ( Zone 0 ) -------------------
+Incompressible Laminar Navier-Stokes' equations.
+No restart solution, use the values at infinity (freestream).
+Dimensional simulation.
+The reference area is 0.0005 m^2.
+The semi-span will be computed using the max y(3D) value.
+The reference length is 1 m.
+Reference origin for moment evaluation is (0, 0, 0).
+Surface(s) where the force coefficients are evaluated: cylinder, plate.
+
+Surface(s) plotted in the output file: cylinder, plate.
+Input mesh file name: fluid.su2
+
+--------------- Space Numerical Integration ( Zone 0 ) ------------------
+Flux difference splitting (FDS) upwind scheme for the flow inviscid terms.
+Second order integration in space, with slope limiter.
+No slope-limiting method. 
+Average of gradients with correction (viscous flow terms).
+Gradient for upwind reconstruction: inverse-distance weighted Least-Squares.
+Gradient for viscous and source terms: inverse-distance weighted Least-Squares.
+
+--------------- Time Numerical Integration  ( Zone 0 ) ------------------
+Unsteady simulation, dual time stepping strategy (second order in time).
+Unsteady time step provided by the user (s): 0.001.
+Euler implicit method for the flow equations.
+FGMRES is used for solving the linear system.
+Using a ILU(0) preconditioning.
+Convergence criteria of the linear solver: 1e-08.
+Max number of linear iterations: 50.
+No CFL adaptation.
+Courant-Friedrichs-Lewy number:    1e+03
+
+------------------ Convergence Criteria  ( Zone 0 ) ---------------------
+Maximum number of solver subiterations: 40.
+Maximum number of physical time-steps: 8000.
+Begin convergence monitoring at iteration 0.
+Residual minimum value: 1e-9.
+Cauchy series min. value: 1e-10.
+Number of Cauchy elements: 100.
+Begin windowed time average at iteration 0.
+
+-------------------- Output Information ( Zone 0 ) ----------------------
+File writing frequency: 
++------------------------------------+
+|                     File| Frequency|
++------------------------------------+
+|                  RESTART|      1000|
++------------------------------------+
+Writing the convergence history file every 0 inner iterations.
+Writing the convergence history file every 1 time iterations.
+Writing the screen convergence history every 1000 inner iterations.
+Writing the screen convergence history every 100 time iterations.
+The tabular file format is CSV (.csv).
+Convergence history file name: history.
+Forces breakdown file name: forces_breakdown.dat.
+Surface file name: surface.
+Volume file name: vol_solution.
+Restart file name: restart_flow.dat.
+
+------------- Config File Boundary Information ( Zone 0 ) ---------------
++-----------------------------------------------------------------------+
+|                        Marker Type|                        Marker Name|
++-----------------------------------------------------------------------+
+|                     Inlet boundary|                              inlet|
++-----------------------------------------------------------------------+
+|                    Outlet boundary|                             outlet|
++-----------------------------------------------------------------------+
+|                     Heat flux wall|                           cylinder|
+|                                   |                              plate|
+|                                   |                                top|
+|                                   |                             bottom|
++-----------------------------------------------------------------------+
+
+-------------------- Output Preprocessing ( Zone 0 ) --------------------
+
+WARNING: SURFACE_PRESSURE_DROP can only be computed for at least 2 surfaces (outlet, inlet, ...)
+
+Screen output fields: TIME_ITER, CUR_TIME, INNER_ITER, RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y, DRAG, LIFT
+History output group(s): TIME_ITER, CUR_TIME, INNER_ITER, RMS_RES, AERO_COEFF, AERO_COEFF_SURF
+Convergence field(s): RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y
+Warning: No (valid) fields chosen for time convergence monitoring. Time convergence monitoring inactive.
+Volume output fields: COORDINATES, SOLUTION, PRIMITIVE
+
+------------------- Geometry Preprocessing ( Zone 0 ) -------------------
+Two dimensional problem.
+21806 grid points before partitioning.
+21344 volume elements before partitioning.
+6 surface markers.
+168 boundary elements in index 0 (Marker = plate).
+86 boundary elements in index 1 (Marker = outlet).
+80 boundary elements in index 2 (Marker = inlet).
+122 boundary elements in index 3 (Marker = cylinder).
+234 boundary elements in index 4 (Marker = bottom).
+234 boundary elements in index 5 (Marker = top).
+Executing the partitioning functions.
+Building the graph adjacency structure.
+Calling ParMETIS... graph partitioning complete (558 edge cuts).
+Distributing ParMETIS coloring.
+Rebalancing vertices.
+Rebalancing volume element connectivity.
+Rebalancing markers and surface elements.
+22926 vertices including ghost points. 
+21896 interior elements including halo cells. 
+21896 quadrilaterals.
+Establishing MPI communication patterns.
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+All volume elements are correctly orientend.
+There has been a re-orientation of 431 LINE surface elements.
+Identifying edges and vertices.
+Setting the control volume structure.
+Area of the computational grid: 1.03022.
+Searching for the closest normal neighbors to the surfaces.
+Storing a mapping from global to local point index.
+Compute the surface curvature.
+Max K: 849.346. Mean K: 8.19233. Standard deviation K: 60.054.
+Checking for periodicity.
+Computing mesh quality statistics for the dual control volumes.
++--------------------------------------------------------------+
+|           Mesh Quality Metric|        Minimum|        Maximum|
++--------------------------------------------------------------+
+|    Orthogonality Angle (deg.)|        64.5625|             90|
+|     CV Face Area Aspect Ratio|              1|        29.7489|
+|           CV Sub-Volume Ratio|              1|        1.56045|
++--------------------------------------------------------------+
+Finding max control volume width.
+Communicating number of neighbors.
+Wetted area = 1.01299 m.
+Area projection in the x-plane = 0.0999315 m, y-plane = 0.449966 m.
+Max. coordinate in the x-direction = 0.6 m, y-direction = 0.25 m.
+Min. coordinate in the x-direction = 0.15 m, y-direction = 0.15 m.
+Computing wall distances.
+
+-------------------- Solver Preprocessing ( Zone 0 ) --------------------
+Incompressible flow: rho_ref, vel_ref, temp_ref, p_ref
+are set to 1.0 in order to perform a dimensional calculation.
+Force coefficients computed using initial values.
+The reference area for force coeffs. is 0.0005 m^2.
+The reference length for force coeffs. is 1 m.
+The pressure is decomposed into thermodynamic and dynamic components.
+The initial value of the dynamic pressure is 0.
+Mach number: 0.167836, computed using the Bulk modulus.
+For external flows, the initial state is imposed at the far-field.
+Angle of attack (deg): 0, computed using the initial velocity.
+Side slip angle (deg): 0, computed using the initial velocity.
+Reynolds number per meter: 2000, computed using initial values.
+Reynolds number is a byproduct of inputs only (not used internally).
+SI units only. The grid should be dimensional (meters).
+No energy equation.
+
+-- Models:
++------------------------------------------------------------------------------+
+|          Viscosity Model|        Conductivity Model|              Fluid Model|
++------------------------------------------------------------------------------+
+|       CONSTANT_VISCOSITY|          CONSTANT_PRANDTL|         CONSTANT_DENSITY|
++------------------------------------------------------------------------------+
+-- Fluid properties:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|             Viscosity|             1|             1|   N.s/m^2|             1|
++------------------------------------------------------------------------------+
+|        Prandtl (Lam.)|             -|             -|         -|          0.72|
+|       Prandtl (Turb.)|             -|             -|         -|           0.9|
++------------------------------------------------------------------------------+
+|          Bulk Modulus|        142000|             1|        Pa|        142000|
++------------------------------------------------------------------------------+
+-- Initial and free-stream conditions:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|      Dynamic Pressure|             0|             1|        Pa|             0|
+|        Total Pressure|          2000|             1|        Pa|          2000|
+|               Density|          1000|             1|    kg/m^3|          1000|
+|            Velocity-X|             2|             1|       m/s|             2|
+|            Velocity-Y|             0|             1|       m/s|             0|
+|    Velocity Magnitude|             2|             1|       m/s|             2|
++------------------------------------------------------------------------------+
+|             Viscosity|             1|             1|   N.s/m^2|             1|
+|          Conductivity|             -|             1|   W/m^2.K|             -|
++------------------------------------------------------------------------------+
+|           Mach Number|             -|             -|         -|      0.167836|
+|       Reynolds Number|             -|             -|         -|          2000|
++------------------------------------------------------------------------------+
+-- Unsteady conditions
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|            Total Time|         1e+06|             1|         s|         1e+06|
+|             Time Step|         0.001|             1|         s|         0.001|
++------------------------------------------------------------------------------+
+Initialize Jacobian structure (Navier-Stokes). MG level: 0.
+No Inlet Interpolation being used
+
+Reading inlet profile from file: inlet_profile.dat
+No Inlet Interpolation being used
+
+------------------- Numerics Preprocessing ( Zone 0 ) -------------------
+
+----------------- Integration Preprocessing ( Zone 0 ) ------------------
+
+------------------- Iteration Preprocessing ( Zone 0 ) ------------------
+Euler/Navier-Stokes/RANS fluid iteration.
+
+------------------------------ Begin Solver -----------------------------
+
+Simulation Run using the Single-zone Driver
+The simulation will run for 8000 time steps.
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|           0|  0.0000e+00|           0|   -0.473454|    0.065240|  -16.500189|16479.236593|  -57.261929|
+|           0|  0.0000e+00|          39|   -1.544606|   -0.534601|   -2.097252|25454.105589| -746.187203|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_00000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         100|  1.0000e-01|           0|   -3.193008|   -0.533126|   -0.871977|  575.593048|  -13.663569|
+|         100|  1.0000e-01|          39|   -3.145104|   -2.104806|   -3.909937|  567.114045|  -13.574467|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         200|  2.0000e-01|           0|   -4.086278|   -0.759212|   -0.969711|  485.591835|   10.344414|
+|         200|  2.0000e-01|          39|   -4.123403|   -3.087017|   -4.905220|  486.510697|   10.504755|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         300|  3.0000e-01|           0|   -5.047451|   -0.861758|   -1.184259|  459.588038|   38.608591|
+|         300|  3.0000e-01|          39|   -5.157272|   -4.121566|   -5.967554|  459.514985|   38.874462|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         400|  4.0000e-01|           0|   -6.979781|   -0.940068|   -1.366831|  443.412765|   71.222075|
+|         400|  4.0000e-01|          39|   -6.609679|   -5.615961|   -6.963775|  443.480766|   71.380304|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         500|  5.0000e-01|           0|   -6.660327|   -0.933462|   -1.427158|  443.735906|   71.611078|
+|         500|  5.0000e-01|          39|   -6.733466|   -5.775746|   -7.121609|  443.787058|   71.516312|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         600|  6.0000e-01|           0|   -6.692362|   -0.927284|   -1.440137|  443.656758|   64.206109|
+|         600|  6.0000e-01|          39|   -6.677423|   -5.683365|   -7.310637|  443.671500|   64.199315|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         700|  7.0000e-01|           0|   -6.810331|   -0.925005|   -1.454550|  443.024941|   54.905555|
+|         700|  7.0000e-01|          39|   -6.803553|   -5.818035|   -7.469126|  443.041288|   54.746048|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         800|  8.0000e-01|           0|   -6.944890|   -0.933787|   -1.481347|  443.091074|   35.219329|
+|         800|  8.0000e-01|          39|   -6.944376|   -5.981612|   -7.605791|  443.104615|   35.126869|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         900|  9.0000e-01|           0|   -6.968349|   -0.946455|   -1.506595|  443.261857|   25.423995|
+|         900|  9.0000e-01|          39|   -6.969826|   -6.013407|   -7.685925|  443.273221|   25.308563|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_00999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1000|  1.0000e+00|           0|   -7.047392|   -0.973621|   -1.513223|  443.501632|    6.621322|
+|        1000|  1.0000e+00|          39|   -7.024540|   -6.034054|   -7.895190|  443.510624|    6.496143|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_01000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1100|  1.1000e+00|           0|   -6.881187|   -1.013758|   -1.509548|  443.689643|   -0.848584|
+|        1100|  1.1000e+00|          39|   -6.878972|   -5.867065|   -7.799529|  443.697297|   -0.884674|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1200|  1.2000e+00|           0|   -7.218848|   -1.006560|   -1.509975|  443.939469|  -13.105135|
+|        1200|  1.2000e+00|          39|   -7.196937|   -6.503444|   -8.072941|  443.945726|  -13.235269|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1300|  1.3000e+00|           0|   -6.980512|   -0.995591|   -1.511123|  444.115788|  -20.205521|
+|        1300|  1.3000e+00|          39|   -6.970182|   -6.064063|   -7.844500|  444.120891|  -20.183565|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1400|  1.4000e+00|           0|   -6.838852|   -0.992462|   -1.522526|  444.317040|  -24.664559|
+|        1400|  1.4000e+00|          39|   -6.835932|   -5.894887|   -7.725213|  444.321715|  -24.780108|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1500|  1.5000e+00|           0|   -6.708600|   -1.012279|   -1.604224|  444.486214|  -33.990884|
+|        1500|  1.5000e+00|          39|   -6.695273|   -5.675472|   -7.607974|  444.489552|  -33.964810|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1600|  1.6000e+00|           0|   -6.120818|   -1.102420|   -1.692975|  444.617755|  -31.966618|
+|        1600|  1.6000e+00|          39|   -6.117566|   -5.088040|   -7.007332|  444.621281|  -32.038360|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1700|  1.7000e+00|           0|   -6.029375|   -1.326981|   -1.704532|  444.790344|  -43.946401|
+|        1700|  1.7000e+00|          39|   -6.030032|   -5.002246|   -6.920704|  444.792542|  -43.967892|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1800|  1.8000e+00|           0|   -6.380931|   -1.663018|   -1.904002|  444.860703|  -38.760005|
+|        1800|  1.8000e+00|          39|   -6.387195|   -5.361489|   -7.284180|  444.863351|  -38.752891|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        1900|  1.9000e+00|           0|   -6.981144|   -1.731227|   -2.326242|  445.036309|  -50.628267|
+|        1900|  1.9000e+00|          39|   -6.970363|   -5.939716|   -7.826496|  445.037998|  -50.728283|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_01999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2000|  2.0000e+00|           0|   -6.718781|   -1.774799|   -2.362234|  445.060794|  -47.117076|
+|        2000|  2.0000e+00|          39|   -6.720442|   -5.691125|   -7.597352|  445.062574|  -47.022273|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_02000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2100|  2.1000e+00|           0|   -6.968726|   -1.824204|   -2.363250|  445.213704|  -53.748179|
+|        2100|  2.1000e+00|          39|   -6.972078|   -5.944623|   -7.836415|  445.215326|  -53.922023|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2200|  2.2000e+00|           0|   -7.401735|   -1.835065|   -2.361539|  445.238970|  -57.227513|
+|        2200|  2.2000e+00|          39|   -7.402725|   -6.377289|   -8.276250|  445.239766|  -57.078522|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2300|  2.3000e+00|           0|   -7.580359|   -1.808147|   -2.308373|  445.330794|  -53.831774|
+|        2300|  2.3000e+00|          39|   -7.560335|   -6.550218|   -8.446624|  445.332588|  -54.017781|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2400|  2.4000e+00|           0|   -7.734628|   -1.766145|   -2.266491|  445.407364|  -67.858676|
+|        2400|  2.4000e+00|          39|   -7.718160|   -6.694562|   -8.599834|  445.407231|  -67.734204|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2500|  2.5000e+00|           0|   -7.927992|   -1.732597|   -2.214762|  445.399417|  -53.138545|
+|        2500|  2.5000e+00|          39|   -7.900855|   -6.880205|   -8.707036|  445.401314|  -53.237099|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2600|  2.6000e+00|           0|   -7.646169|   -1.680996|   -2.157147|  445.561717|  -76.247104|
+|        2600|  2.6000e+00|          39|   -7.656397|   -6.631426|   -8.479670|  445.561116|  -76.259727|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2700|  2.7000e+00|           0|   -7.634524|   -1.640659|   -2.109334|  445.445441|  -54.950784|
+|        2700|  2.7000e+00|          39|   -7.644989|   -6.636328|   -8.503065|  445.447067|  -54.863710|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2800|  2.8000e+00|           0|   -7.339869|   -1.588145|   -2.052027|  445.680381|  -78.911287|
+|        2800|  2.8000e+00|          39|   -7.336140|   -6.327029|   -8.220254|  445.680133|  -79.142428|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        2900|  2.9000e+00|           0|   -7.280695|   -1.538312|   -2.004649|  445.505000|  -62.636215|
+|        2900|  2.9000e+00|          39|   -7.271370|   -6.264117|   -8.186470|  445.505674|  -62.316247|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_02999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3000|  3.0000e+00|           0|   -7.179146|   -1.485171|   -1.952682|  445.733843|  -73.818026|
+|        3000|  3.0000e+00|          39|   -7.164639|   -6.157601|   -8.081294|  445.734821|  -74.252634|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_03000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3100|  3.1000e+00|           0|   -7.191565|   -1.430880|   -1.904330|  445.611638|  -77.414214|
+|        3100|  3.1000e+00|          39|   -7.171775|   -6.163791|   -8.111466|  445.610643|  -76.942112|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3200|  3.2000e+00|           0|   -7.216737|   -1.378221|   -1.851433|  445.702525|  -61.896635|
+|        3200|  3.2000e+00|          39|   -7.189961|   -6.183254|   -8.134453|  445.705089|  -62.386637|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3300|  3.3000e+00|           0|   -7.369270|   -1.325209|   -1.798933|  445.778235|  -95.975898|
+|        3300|  3.3000e+00|          39|   -7.332965|   -6.321378|   -8.306342|  445.775275|  -95.576464|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3400|  3.4000e+00|           0|   -7.809240|   -1.274718|   -1.742908|  445.604931|  -48.743118|
+|        3400|  3.4000e+00|          39|   -7.718314|   -6.708543|   -8.683758|  445.608509|  -49.004790|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3500|  3.5000e+00|           0|   -7.477737|   -1.223479|   -1.687016|  445.980896| -110.721314|
+|        3500|  3.5000e+00|          39|   -7.505784|   -6.488830|   -8.302259|  445.976943| -110.701801|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3600|  3.6000e+00|           0|   -7.151310|   -1.173232|   -1.632012|  445.505801|  -44.095709|
+|        3600|  3.6000e+00|          39|   -7.159993|   -6.152140|   -8.022807|  445.509185|  -43.829106|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3700|  3.7000e+00|           0|   -6.925390|   -1.121053|   -1.578562|  446.135652| -111.266731|
+|        3700|  3.7000e+00|          39|   -6.922406|   -5.915342|   -7.817740|  446.133454| -111.889109|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3800|  3.8000e+00|           0|   -6.807332|   -1.067807|   -1.525374|  445.488893|  -57.223763|
+|        3800|  3.8000e+00|          39|   -6.798034|   -5.790531|   -7.706381|  445.490404|  -56.289391|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        3900|  3.9000e+00|           0|   -6.724747|   -1.014265|   -1.476505|  446.120321|  -89.704244|
+|        3900|  3.9000e+00|          39|   -6.710366|   -5.703754|   -7.633053|  446.122661|  -90.952311|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_03999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4000|  4.0000e+00|           0|   -6.709790|   -0.959297|   -1.422127|  445.637726|  -92.016575|
+|        4000|  4.0000e+00|          39|   -6.690425|   -5.682355|   -7.627098|  445.634712|  -90.596297|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_04000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4100|  4.1000e+00|           0|   -6.746834|   -0.907051|   -1.371952|  445.868055|  -48.434579|
+|        4100|  4.1000e+00|          39|   -6.720700|   -5.714359|   -7.666576|  445.875155|  -49.867828|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4200|  4.2000e+00|           0|   -6.855025|   -0.854496|   -1.315604|  446.007431| -140.567105|
+|        4200|  4.2000e+00|          39|   -6.820290|   -5.808941|   -7.793001|  445.997382| -139.294274|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4300|  4.3000e+00|           0|   -7.247286|   -0.805260|   -1.259177|  445.453325|   -3.195130|
+|        4300|  4.3000e+00|          39|   -7.174291|   -6.164522|   -8.152630|  445.462593|   -4.020918|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4400|  4.4000e+00|           0|   -7.125478|   -0.756193|   -1.204878|  446.548096| -179.687742|
+|        4400|  4.4000e+00|          39|   -7.157802|   -6.137963|   -7.931148|  446.533913| -179.499271|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4500|  4.5000e+00|           0|   -6.693934|   -0.707722|   -1.145648|  445.086671|   18.822894|
+|        4500|  4.5000e+00|          39|   -6.704646|   -5.694773|   -7.558612|  445.095681|   19.477893|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4600|  4.6000e+00|           0|   -6.488551|   -0.660176|   -1.096239|  446.974535| -178.111064|
+|        4600|  4.6000e+00|          39|   -6.486998|   -5.480126|   -7.383836|  446.967749| -179.782496|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4700|  4.7000e+00|           0|   -6.350887|   -0.609990|   -1.038035|  444.970663|  -10.348807|
+|        4700|  4.7000e+00|          39|   -6.342219|   -5.333552|   -7.242741|  444.977933|   -7.770555|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4800|  4.8000e+00|           0|   -6.271136|   -0.562870|   -0.991853|  446.797725| -112.207624|
+|        4800|  4.8000e+00|          39|   -6.257532|   -5.251684|   -7.179431|  446.808245| -115.706850|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        4900|  4.9000e+00|           0|   -6.255818|   -0.513946|   -0.933732|  445.237115| -100.695036|
+|        4900|  4.9000e+00|          39|   -6.237471|   -5.228186|   -7.172434|  445.234492|  -96.695234|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_04999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5000|  5.0000e+00|           0|   -6.298364|   -0.470266|   -0.884235|  445.855684|    9.744154|
+|        5000|  5.0000e+00|          39|   -6.273230|   -5.266684|   -7.209361|  445.876516|    5.770090|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_05000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5100|  5.1000e+00|           0|   -6.356724|   -0.427436|   -0.825935|  446.177638| -227.282472|
+|        5100|  5.1000e+00|          39|   -6.327754|   -5.312871|   -7.289566|  446.146150| -223.591041|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5200|  5.2000e+00|           0|   -6.834559|   -0.391618|   -0.771482|  444.682554|  133.771293|
+|        5200|  5.2000e+00|          39|   -6.754842|   -5.748864|   -7.706007|  444.698996|  131.562096|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5300|  5.3000e+00|           0|   -6.748249|   -0.356432|   -0.717666|  447.862796| -320.755904|
+|        5300|  5.3000e+00|          39|   -6.760999|   -5.733577|   -7.551328|  447.814937| -319.978656|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5400|  5.4000e+00|           0|   -6.283444|   -0.327422|   -0.665769|  444.094371|  183.296395|
+|        5400|  5.4000e+00|          39|   -6.295784|   -5.285171|   -7.128070|  444.106724|  184.749007|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5500|  5.5000e+00|           0|   -6.104381|   -0.300101|   -0.620550|  449.027523| -291.757697|
+|        5500|  5.5000e+00|          39|   -6.104111|   -5.097620|   -7.001503|  449.017119| -295.760418|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5600|  5.6000e+00|           0|   -5.991427|   -0.274837|   -0.575443|  443.989083|  102.515080|
+|        5600|  5.6000e+00|          39|   -5.983073|   -4.972472|   -6.863216|  444.022715|  108.115393|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5700|  5.7000e+00|           0|   -5.941527|   -0.255307|   -0.542743|  447.770230| -104.252138|
+|        5700|  5.7000e+00|          39|   -5.926586|   -4.918690|   -6.846594|  447.816922| -111.960764|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5800|  5.8000e+00|           0|   -5.959019|   -0.237609|   -0.503013|  444.033641|  -98.990358|
+|        5800|  5.8000e+00|          39|   -5.940903|   -4.930144|   -6.870286|  444.056482|  -90.999721|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        5900|  5.9000e+00|           0|   -6.063455|   -0.228249|   -0.484612|  444.794870|  155.229346|
+|        5900|  5.9000e+00|          39|   -6.036358|   -5.026788|   -6.924467|  444.844003|  148.097054|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_05999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6000|  6.0000e+00|           0|   -6.139318|   -0.218492|   -0.443555|  446.094574| -319.774994|
+|        6000|  6.0000e+00|          39|   -6.109304|   -5.093295|   -7.048087|  446.019552| -313.412571|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_06000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6100|  6.1000e+00|           0|   -6.888558|   -0.223688|   -0.447654|  443.438867|  322.060342|
+|        6100|  6.1000e+00|          39|   -6.821733|   -5.820057|   -7.619041|  443.441482|  319.573262|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6200|  6.2000e+00|           0|   -6.437162|   -0.212851|   -0.400484|  449.837214| -410.030910|
+|        6200|  6.2000e+00|          39|   -6.461832|   -5.443025|   -7.260781|  449.743210| -409.584104|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6300|  6.3000e+00|           0|   -6.065932|   -0.225587|   -0.429575|  443.698090|  299.717316|
+|        6300|  6.3000e+00|          39|   -6.070548|   -5.060447|   -6.869306|  443.710932|  302.826928|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6400|  6.4000e+00|           0|   -5.923115|   -0.213344|   -0.383697|  450.285060| -274.037505|
+|        6400|  6.4000e+00|          39|   -5.918583|   -4.911745|   -6.817172|  450.300514| -280.742558|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6500|  6.5000e+00|           0|   -5.911193|   -0.224133|   -0.413597|  443.187244|  110.957040|
+|        6500|  6.5000e+00|          39|   -5.900824|   -4.890298|   -6.781515|  443.248431|  118.182489|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6600|  6.6000e+00|           0|   -5.889109|   -0.217409|   -0.395593|  446.485259|   23.546934|
+|        6600|  6.6000e+00|          39|   -5.870586|   -4.860711|   -6.764527|  446.567599|   14.119577|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6700|  6.7000e+00|           0|   -5.967969|   -0.224952|   -0.396592|  443.219322| -149.992495|
+|        6700|  6.7000e+00|          39|   -5.947505|   -4.936487|   -6.880017|  443.240865| -141.735082|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6800|  6.8000e+00|           0|   -6.221889|   -0.229825|   -0.421894|  443.485888|  276.422080|
+|        6800|  6.8000e+00|          39|   -6.183020|   -5.172482|   -7.093782|  443.518494|  270.586565|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        6900|  6.9000e+00|           0|   -6.273818|   -0.226615|   -0.382933|  446.828355| -349.900604|
+|        6900|  6.9000e+00|          39|   -6.242673|   -5.220309|   -7.168074|  446.725812| -345.123221|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_06999.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7000|  7.0000e+00|           0|   -6.415510|   -0.246978|   -0.445725|  443.412671|  341.675184|
+|        7000|  7.0000e+00|          39|   -6.440978|   -5.429150|   -7.176052|  443.411194|  341.670726|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_07000.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7100|  7.1000e+00|           0|   -6.134893|   -0.229324|   -0.384232|  449.984208| -357.302592|
+|        7100|  7.1000e+00|          39|   -6.144147|   -5.133201|   -6.991097|  449.930984| -359.708685|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7200|  7.2000e+00|           0|   -6.004030|   -0.251087|   -0.451017|  443.464503|  229.419910|
+|        7200|  7.2000e+00|          39|   -6.000647|   -4.991151|   -6.845218|  443.494171|  234.146284|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7300|  7.3000e+00|           0|   -5.888589|   -0.234615|   -0.406872|  448.350507| -142.296434|
+|        7300|  7.3000e+00|          39|   -5.877417|   -4.868880|   -6.781608|  448.405583| -150.612414|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7400|  7.4000e+00|           0|   -5.944027|   -0.246881|   -0.435904|  442.763079|    5.890916|
+|        7400|  7.4000e+00|          39|   -5.929637|   -4.919489|   -6.839772|  442.823552|   13.447007|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7500|  7.5000e+00|           0|   -6.002009|   -0.242316|   -0.441752|  444.686778|  145.406280|
+|        7500|  7.5000e+00|          39|   -5.977134|   -4.966739|   -6.884045|  444.749391|  137.393740|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7600|  7.6000e+00|           0|   -6.076070|   -0.242837|   -0.418177|  444.217538| -238.886839|
+|        7600|  7.6000e+00|          39|   -6.051289|   -5.038567|   -6.993117|  444.182785| -231.881512|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7700|  7.7000e+00|           0|   -6.665632|   -0.254889|   -0.468095|  443.313321|  313.405337|
+|        7700|  7.7000e+00|          39|   -6.594002|   -5.585729|   -7.526558|  443.321238|  310.284887|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7800|  7.8000e+00|           0|   -6.412530|   -0.240564|   -0.409711|  448.179002| -368.655107|
+|        7800|  7.8000e+00|          39|   -6.414240|   -5.379893|   -7.238719|  448.083656| -366.870712|
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7900|  7.9000e+00|           0|   -6.180222|   -0.262829|   -0.476587|  443.601665|  300.557208|
+|        7900|  7.9000e+00|          39|   -6.189871|   -5.179504|   -6.996886|  443.608931|  302.675821|
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_07998.dat             |
++-----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|        7999|  7.9990e+00|           0|   -5.978880|   -0.242131|   -0.419088|  449.346161| -270.909388|
+|        7999|  7.9990e+00|          39|   -5.976382|   -4.969594|   -6.867870|  449.347447| -276.536398|
+
+----------------------------- Solver Exit -------------------------------
+Maximum number of time iterations reached (TIME_ITER = 8000).
+-------------------------------------------------------------------------
++-----------------------------------------------------------------------+
+|        File Writing Summary       |              Filename             |
++-----------------------------------------------------------------------+
+|SU2 binary restart                 |restart_flow_07999.dat             |
++-----------------------------------------------------------------------+
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterface container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted nInst container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
