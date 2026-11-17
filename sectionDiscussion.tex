@@ -17,23 +17,23 @@ None of these items requires a new benchmark, and all can be added to existing s
 
 \paragraph{Exact references are diagnostic, not only decisive.}
 The two category-A problems are the least expensive in the suite, yet they did most to locate errors.
-In womersleyTube the exact reference turned a falling temporal order into a specific $O(\Delta t)$ end-flux inconsistency, separated from the coupling by fluid-only runs with the exact wall motion (Section~\ref{sec:womersley}); in ringAddedMass the wet/dry frequency ratio separates the added mass from the solid and temporal errors, and the remaining $-0.13\%$ was attributed to the BDF2 phase error (Section~\ref{sec:ring}).
+In the Womersley tube the exact reference turned a falling temporal order into a specific $O(\Delta t)$ end-flux inconsistency, separated from the coupling by fluid-only runs with the exact wall motion (Section~\ref{sec:womersley}); in the ring added-mass problem the wet/dry frequency ratio separates the added mass from the solid and temporal errors, and the remaining $-0.13\%$ was attributed to the BDF2 phase error (Section~\ref{sec:ring}).
 Neither diagnosis could have been made from convergence data alone.
 A linearised exact solution is, however, exact only in the limit of vanishing amplitude.
 At finite amplitude the computed fields live on a deformed mesh, and where the reference is evaluated (at the undeformed or the current cell positions) matters at $O(\eta\,\partial u/\partial r)$ next to a moving wall.
-In the companion solver study~\citep{CardiffBatistic2026QM}, at the amplitude of the womersleyTube tutorial this choice alone changes the near-wall reference velocity by up to $8\times10^{-4}$ of the peak, depending on how the fluid mesh is moved, which is comparable with the finest-mesh errors reported here; at a tenth of the amplitude it falls below them.
+In the companion solver study~\citep{CardiffBatistic2026QM}, at the amplitude of the Womersley tube case this choice alone changes the near-wall reference velocity by up to $8\times10^{-4}$ of the peak, depending on how the fluid mesh is moved, which is comparable with the finest-mesh errors reported here; at a tenth of the amplitude it falls below them.
 Exact references for moving-boundary problems should therefore be used at amplitudes small enough that this ambiguity is below the errors to be measured, and the evaluation point should be stated.
 
 \paragraph{Model-form differences in code-to-code comparison.}
 An independent code tests the shared discretisation error that same-lineage comparisons cannot, but only if the two codes solve the same problem or the difference is quantified.
-In collapsibleChannel the oomph-lib beam and the continuum wall differ at $O(h/L)$, quantified as $0.05\%$, which is why that reference is category B (Section~\ref{sec:collapsible}); in the FEBio ring comparison weak compressibility, finite strain, finite amplitude and the mesh-motion regulariser were each quantified, at the $0.01$-percentage-point level (Section~\ref{sec:ring}).
-In mokLidDrivenCavity the published Kratos example turned out to solve a different problem, with openings that move with the mesh; with the openings fixed, the remaining difference from solids4foam is the outlet condition, quantified at $0.5$--$1.7\%$, which limits that comparison to about $1\%$ (Section~\ref{sec:mok}).
-In 3dTube, by contrast, the present Hookean solid and the St Venant--Kirchhoff solids of the published calculations differ at a peak hoop strain of $\approx3\%$, and the references use implicit Euler without time-step studies; there, the difference in time integration alone reproduces most of a 20--25\% discrepancy between published solutions (Section~\ref{sec:3dtube}).
+In the collapsible channel the oomph-lib beam and the continuum wall differ at $O(h/L)$, quantified as $0.05\%$, which is why that reference is category B (Section~\ref{sec:collapsible}); in the FEBio ring comparison weak compressibility, finite strain, finite amplitude and the mesh-motion regulariser were each quantified, at the level of $0.01\%$ of the frequency ratio (Section~\ref{sec:ring}).
+In the Mok lid-driven cavity the published Kratos example turned out to solve a different problem, with openings that move with the mesh; with the openings fixed, the remaining difference from solids4foam is the outlet condition, quantified at $0.5$--$1.7\%$, which limits that comparison to about $1\%$ (Section~\ref{sec:mok}).
+In the 3-D pressure-pulse tube, by contrast, the present Hookean solid and the St Venant--Kirchhoff solids of the published calculations differ at a peak hoop strain of $\approx3\%$, and the references use implicit Euler without time-step studies; there, the difference in time integration alone reproduces most of a 20--25\% discrepancy between published solutions (Section~\ref{sec:3dtube}).
 A code-to-code difference can be interpreted only where it exceeds the sum of both codes' numerical uncertainties and the quantified model-form contribution.
 
 \paragraph{Verification and validation.}
 \todo{The numbers in this paragraph come from the withdrawn chamfered-mesh campaign; update them from the feature-edge campaign (Section~\ref{sec:hessenthaler}) or remove the paragraph.}
-The Hessenthaler case shows why the two are kept apart.
+The Hessenthaler flap shows why the two are kept apart.
 Refinement moves the computed tip away from the measurement (from $-0.21\,\mathrm{mm}$ on the coarsest meshes to $+0.40\,\mathrm{mm}$ on the finest), so the close agreement of a coarse mesh is partly a cancellation of discretisation error (Section~\ref{sec:hessenthaler}).
 A validation statement made on that mesh would have credited the model with an accuracy that belonged to the discretisation error.
 Validation requires a verified solution with a stated numerical uncertainty and an experimental uncertainty; here the second is not available, and the first is complete except for the fluid convergence of the tip.
@@ -41,7 +41,7 @@ Validation requires a verified solution with a stated numerical uncertainty and 
 \paragraph{Limits of the suite.}
 The suite covers incompressible, laminar, Newtonian flows coupled to elastic solids through a sharp interface, conforming or non-conforming.
 It does not cover compressible or non-Newtonian fluids, turbulence, contact, free surfaces, or immersed and fictitious-domain interface treatments, and its hyperelastic solids are limited to St Venant--Kirchhoff and neo-Hookean laws.
-All calculations come from one code family (partitioned finite volume, solids4foam); independent numerical references exist only for collapsibleChannel, Hron--Turek FSI1, Hron--Turek FSI3~\citep{Failer2020}, ringAddedMass (FEBio) and, for the provisional cavityFlexibleBottom, COMSOL, so the remaining cases rest on self-convergence and on published values of incompletely quantified accuracy.
+All calculations come from one code family (partitioned finite volume, solids4foam); independent numerical references exist only for the collapsible channel, Hron--Turek FSI1, Hron--Turek FSI3~\citep{Failer2020}, the ring added-mass problem (FEBio) and, for the provisional flexible-bottom cavity, COMSOL, so the remaining cases rest on self-convergence and on published values of incompletely quantified accuracy.
 The three-dimensional problems are the least completely verified, for the cost reasons of Section~\ref{sec:cost}.
 These limits mark where the suite can support a claim; they are not a judgement on the problems outside it.
 

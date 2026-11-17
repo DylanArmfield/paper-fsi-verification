@@ -12,14 +12,14 @@
 
 All results in this paper were obtained with the partitioned fluid--solid interaction framework of the open-source toolbox solids4foam~\citep{Cardiff2025}, which builds on the OpenFOAM finite volume library~\citep{Weller1998} and follows the partitioned approach of \citet{Tukovic2018}.
 The fluid and the solid are discretised on separate cell-centred finite volume meshes and solved by separate field solvers, which exchange interface displacements and tractions within each time step.
-This section summarises the components that determine the discretisation, temporal and iterative errors studied in Sections~\ref{sec:verification_methodology}--\ref{sec:cross_benchmark}; implementation detail is in the solids4foam source and in the case dictionaries that accompany each benchmark.
+This section summarises the components that determine the discretisation, temporal and iterative errors studied in Sections~\ref{sec:verification_methodology}--\ref{sec:cross_benchmark}; implementation detail is in the source code and in the case set-ups that accompany each benchmark.
 Case-specific choices (time scheme, convection scheme, solid variant, coupling algorithm and tolerances) are stated with each benchmark in Section~\ref{sec:benchmark_suite}.
 
 %%--------------------------------------------------------------------------------------------------------------------%%
 \subsection{Fluid}\label{sec:fluid_solver}
 %%--------------------------------------------------------------------------------------------------------------------%%
 
-The incompressible Navier--Stokes equations in ALE form (Section~\ref{sec:fluid_governing_eqn}) are solved by the \texttt{pimpleFluid} model, a solids4foam port of the OpenFOAM \texttt{pimpleFoam} solver.
+The incompressible Navier--Stokes equations in ALE form (Section~\ref{sec:fluid_governing_eqn}) are solved by a segregated, pressure-based finite volume procedure (\texttt{pimpleFluid} in solids4foam, adapted from the OpenFOAM \texttt{pimpleFoam} solver).
 Velocity and pressure are collocated at cell centres; the face fluxes are obtained by Rhie--Chow-type momentum interpolation~\citep{Rhie1983}, and the pressure--velocity coupling is the segregated PIMPLE algorithm (PISO pressure correctors within SIMPLE-type outer correctors), with the numbers of outer and pressure correctors stated per case.
 Spatial operators are the standard second-order finite volume operators: midpoint quadrature, linear face interpolation, least-squares or Gauss cell gradients, and Laplacian face fluxes with explicit non-orthogonal correction~\citep{Jasak1996}.
 Convection is discretised with central (\texttt{linear}) or limited linear-upwind interpolation, depending on the case.
@@ -39,7 +39,7 @@ Mesh motion is a numerical device: it changes the discrete solution only through
 %%--------------------------------------------------------------------------------------------------------------------%%
 
 The solid momentum equation (Section~\ref{sec:solid_model}) is discretised by a cell-centred finite volume method with the total displacement as unknown~\citep{Jasak2000, Cardiff2021}.
-Two kinematic formulations are used: a small-strain (linear geometry) formulation for the linear-elastic walls (ringAddedMass, womersleyTube, 3dTube), and a total Lagrangian formulation for the finite-strain problems, with St Venant--Kirchhoff (Hron--Turek, collapsibleChannel, mokLidDrivenCavity) or neo-Hookean (Hessenthaler) material laws.
+Two kinematic formulations are used: a small-strain (linear geometry) formulation for the linear-elastic walls (the ring added-mass problem, the Womersley tube and the 3-D pressure-pulse tube), and a total Lagrangian formulation for the finite-strain problems, with St Venant--Kirchhoff (the Hron--Turek benchmarks, the collapsible channel and the Mok lid-driven cavity) or neo-Hookean (the Hessenthaler flap) material laws.
 The time derivative uses BDF2, and each solid solve is a Newton--Krylov iteration through the PETSc SNES interface~\citep{PETSc, Cardiff2026}.
 Two spatial variants are used.
 The \emph{standard} variant uses a linear least-squares reconstruction of the displacement and a compact-stencil momentum stabilisation, a Rhie--Chow-type difference between the compact and the reconstructed face normal gradient, scaled by a user factor~\citep{Cardiff2026}; it is formally second order, but the stabilisation is not negligible on coarse meshes and stiffens thin, bending-dominated structures (Section~\ref{sec:fsi1}).
@@ -53,12 +53,12 @@ Which variant is used is stated per case, because for thin bending-dominated wal
 %%--------------------------------------------------------------------------------------------------------------------%%
 
 Displacements are transferred from the solid to the fluid interface at the interface points, and tractions from the fluid to the solid interface at the faces.
-Where the two interface meshes coincide (ringAddedMass, womersleyTube, collapsibleChannel, mokLidDrivenCavity), a direct one-to-one map is used.
-Where they do not (Hron--Turek, 3dTube, Hessenthaler), face tractions are interpolated with arbitrary-mesh-interface (AMI) weights, and point displacements by barycentric interpolation on a triangulation of the donor interface faces.
+Where the two interface meshes coincide (the ring added-mass problem, the Womersley tube, the collapsible channel and the Mok lid-driven cavity), a direct one-to-one map is used.
+Where they do not (the Hron--Turek benchmarks, the 3-D pressure-pulse tube and the Hessenthaler flap), face tractions are interpolated with arbitrary-mesh-interface (AMI) weights, and point displacements by barycentric interpolation on a triangulation of the donor interface faces.
 The finite volume fluid delivers one area-averaged traction per face, and the solid receives one value per interface face.
 With the high-order solid this value is applied uniformly at all quadrature points of the face, so the interface load is piecewise constant: it preserves the transferred force on every face and is second-order accurate, consistent with the fluid, but it does not carry the higher order of the solid operator to the coupled problem.
 A higher-order load would require the fluid traction at the solid face quadrature points.
-The interface transfer is part of the discretisation: it is an operator that must converge with refinement like any other, and in 3dTube a defect in it changed with mesh level (Section~\ref{sec:3dtube}).
+The interface transfer is part of the discretisation: it is an operator that must converge with refinement like any other, and in the 3-D pressure-pulse tube a defect in it changed with mesh level (Section~\ref{sec:3dtube}).
 
 %%--------------------------------------------------------------------------------------------------------------------%%
 \subsection{Coupling algorithms}\label{sec:coupling_algorithms}
@@ -87,7 +87,7 @@ Two normalised measures are formed,
 	\label{eq:coupling_residuals}
 \end{equation}
 where the maximum in $r_1$ is over the coupling iterations $k$ of the current step and $\|\bb{d}^\Gamma\|_{\max}$ is the largest norm of the \emph{total} interface displacement seen so far.
-In the legacy default a step is accepted when $\min(r_1, r_2)$ is below the coupling tolerance; a strict option requires $\max(r_1, r_2)$ to be below it.
+With the default (legacy) test a step is accepted when $\min(r_1, r_2)$ is below the coupling tolerance; a strict option requires $\max(r_1, r_2)$ to be below it.
 The two tests differ greatly in slowly varying phases with a large total interface displacement, where $r_2$ can be small after a single relaxed iteration whatever the reduction of the residual within the step (Section~\ref{sec:iterative_errors}).
 Robin--Neumann iterations additionally require the change of interface pressure and the interface leakage flux to fall below their own tolerances.
 By default, a step that does not meet the test within the maximum number of iterations stops the run; the default test can nevertheless accept insufficiently converged steps, as shown in Section~\ref{sec:iterative_errors}.

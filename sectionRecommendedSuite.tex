@@ -42,10 +42,10 @@ We therefore propose a tiered suite (Table~\ref{tab:suite_tiers}), with membersh
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The routine subset of the core suite (the default levels of each driver) is cheap enough to run after any change to a discretisation or coupling algorithm; the full refinement studies behind the statements of Section~\ref{sec:benchmark_suite} (for FSI1, $\approx25$\,h on 64 ranks for the finest level) are a verification campaign, not a routine check.
-Its backbone is the two category-A problems, which alone measure the total error directly; the category-B problems extend it to large deformation within reference uncertainties of $<0.01\%$ plus a $0.05\%$ model-form difference (collapsibleChannel, oomph-lib extrapolated to zero mesh size) and $\approx0.2\%$ (FSI1).
+Its backbone is the two category-A problems, which alone measure the total error directly; the category-B problems extend it to large deformation within reference uncertainties of $<0.01\%$ plus a $0.05\%$ model-form difference (collapsible channel, oomph-lib extrapolated to zero mesh size) and $\approx0.2\%$ (FSI1).
 
 The requirement is not a fixed matrix of studies but the principle of Section~\ref{sec:convergence_method}: for each QoI on which a claim is made, the error sources that materially affect it must be shown to be controlled below the uncertainty relevant to the claim.
-The benchmarks therefore emphasise different studies: ringAddedMass isolates temporal, solid-discretisation and added-mass effects; womersleyTube requires careful temporal and phase analysis and a flux-consistent treatment of its truncated ends; collapsibleChannel requires control of the solid discretisation and of the coupling tolerance; and, in the extended suite, Hron--Turek FSI3 requires separate solid, rigid-fluid and prescribed-motion studies to interpret its sub-nominal coupled order.
+The benchmarks therefore emphasise different studies: the ring added-mass problem isolates temporal, solid-discretisation and added-mass effects; the Womersley tube requires careful temporal and phase analysis and a flux-consistent treatment of its truncated ends; the collapsible channel requires control of the solid discretisation and of the coupling tolerance; and, in the extended suite, Hron--Turek FSI3 requires separate solid, rigid-fluid and prescribed-motion studies to interpret its sub-nominal coupled order.
 Each core result should state its reference category, the number of levels and the observed behaviour for at least one displacement-type and one force- or phase-type QoI, the evidence that the iterative error is subordinate (including the convergence test used and the residual reduction at acceptance), and the code version, compiler and platform.
 
 % mokLidDrivenCavity placed in the extended suite (Philip, 2 Nov 2026): cheap
@@ -59,7 +59,7 @@ Each core result should state its reference category, the number of levels and t
 
 The extended suite does not establish formal order, which the core suite does more cheaply and reliably, but tests whether that accuracy carries over to three dimensions, complex geometry, large mesh motion and slowly converging QoIs.
 Hron--Turek FSI2/FSI3 belong here despite being two-dimensional, because their slowest QoIs need resolutions well beyond the core suite, the FSI3 displacements converge at an observed order of about one unless the mesh motion and wall-pressure treatment are chosen with care, and even then are not in the asymptotic range on a fluid mesh of $7.5\times10^5$ cells, and the FSI3 reference itself carries a $3$--$5\%$ uncertainty in $u_x$ and the force amplitudes.
-mokLidDrivenCavity is inexpensive but belongs here too: its published references are mutually inconsistent, and although an independent Kratos solution now agrees to about $1\%$, neither sequence is in the asymptotic range for the peak; its value is as a test of sensitivity to the problem definition and of coupling robustness (Section~\ref{sec:mok}).
+The Mok lid-driven cavity is inexpensive but belongs here too: its published references are mutually inconsistent, and although an independent Kratos solution now agrees to about $1\%$, neither sequence is in the asymptotic range for the peak; its value is as a test of sensitivity to the problem definition and of coupling robustness (Section~\ref{sec:mok}).
 Published values should be quoted with their source (e.g.\ Featflow table or summary value) and reference category, and agreement with them should not be presented as verification without self-convergence evidence.
 
 \todo{Final extended-suite membership depends on: for beamInCrossFlow, a fourth level and the author's confirmation of the corrected inflow; the Hessenthaler verification campaign; for cavityFlexibleBottom, an observed order and the force definition for the COMSOL reference; for 3dTube, a fourth level or an independent converged solution for $u_{r,\max}$. A case without at least three mesh levels should not be listed as ``verified'' in any final suite table.}
@@ -79,27 +79,27 @@ Independently of the code used, we recommend the following properties, which the
 \end{itemize}
 
 Such infrastructure allows a verification claim to be re-executed rather than accepted on trust.
-Table~\ref{tab:driver_properties} states which of these properties the present drivers implement. Every driver exits with a non-zero status when a criterion fails and writes its QoIs to CSV, and every case has a machine-readable reference file that records its source. The extraction method is recorded explicitly for 3dTube, Hron--Turek and beamInCrossFlow, and collapsibleChannel stores the oomph-lib driver that generates its reference. No driver records the compiler or its flags; where they are known, they are given in Table~\ref{tab:provenance}.
+Table~\ref{tab:driver_properties} states which of these properties the present drivers implement. Every driver exits with a non-zero status when a criterion fails and writes its QoIs to CSV, and every case has a machine-readable reference file that records its source. The extraction method is recorded explicitly for the 3-D pressure-pulse tube, the Hron--Turek benchmarks and the beam in cross-flow, and the collapsible channel stores the oomph-lib driver that generates its reference. No driver records the compiler or its flags; where they are known, they are given in Table~\ref{tab:provenance}.
 
 \begin{table}[htbp]
 	\centering
 	\footnotesize
 	\setlength{\tabcolsep}{4pt}
-	\caption{Reproducibility properties implemented by the verification driver of each case (solids4foam \texttt{development}, November 2026): non-zero exit status on failure (Exit), CSV output, hashes of the case files, the OpenFOAM version, a fingerprint of the solver executable and libraries, and the solids4foam commit. The Hessenthaler driver is on a campaign branch and is not included.}
+	\caption{Reproducibility properties implemented by the verification driver of each case (solids4foam \texttt{development}, November 2026): non-zero exit status on failure (Exit), CSV output, hashes of the case files, the OpenFOAM version, a fingerprint of the solver executable and libraries, and the solids4foam commit. The driver of the Hessenthaler flap is not yet part of the released suite and is not included.}
 	\label{tab:driver_properties}
 	\begin{tabular}{lcccccc}
 		\toprule
 		Case & Exit & CSV & Hashes & OF version & Fingerprint & Commit \\
 		\midrule
-		ringAddedMass & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & -- \\
-		womersleyTube & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-		collapsibleChannel & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & -- \\
+		Ring added-mass problem & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & -- \\
+		Womersley tube & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+		Collapsible channel & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & -- \\
 		Hron--Turek FSI1--FSI3 & \checkmark & \checkmark & -- & -- & -- & -- \\
-		3dTube & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
-		mokLidDrivenCavity & \checkmark & \checkmark & \checkmark & -- & \checkmark & -- \\
-		cavityFlexibleBottom$^\ast$ & \checkmark & \checkmark & -- & -- & -- & -- \\
-		blobInTreacle$^\ast$ & \checkmark & \checkmark & -- & -- & -- & -- \\
-		beamInCrossFlow$^\ast$ & \checkmark & \checkmark & -- & -- & -- & -- \\
+		3-D pressure-pulse tube & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+		Mok lid-driven cavity & \checkmark & \checkmark & \checkmark & -- & \checkmark & -- \\
+		Flexible-bottom cavity$^\ast$ & \checkmark & \checkmark & -- & -- & -- & -- \\
+		Blob in treacle$^\ast$ & \checkmark & \checkmark & -- & -- & -- & -- \\
+		Beam in cross-flow$^\ast$ & \checkmark & \checkmark & -- & -- & -- & -- \\
 		\bottomrule
 		\multicolumn{7}{l}{$^\ast$ Provisional cases.}
 	\end{tabular}

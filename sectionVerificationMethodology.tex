@@ -40,10 +40,10 @@ The category describes the reference, not the benchmark problem and not the qual
 		\toprule
 		Category & Definition & Cases \\
 		\midrule
-		A & Analytical or semi-analytical solution of the stated continuum problem, with any numerical error of its own (e.g.\ collocation) controlled to near round-off. & ringAddedMass, womersleyTube \\
-		B & Independently computed numerical solution, by a different code and with its own convergence evidence, either of the same problem or of a problem with a small, explicitly identified model-form difference whose effect on the QoIs is quantified and small compared with the numerical errors of interest. & Hron--Turek FSI1 (Featflow, six levels; and a solution with an independent solid code, preCICE--CalculiX); Hron--Turek FSI3 (\citet{Failer2020}, six levels); collapsibleChannel (oomph-lib, beam wall model); mokLidDrivenCavity (Kratos, group-B definition, outlet condition) \\
-		C & Published benchmark value whose own discretisation error is only partly quantified. & Hron--Turek FSI2 (Featflow level 4); beamInCrossFlow (\citet{Richter2012}, corrected inflow) \\
-		C-weak & As C, but digitised from figures, single-mesh, mutually inconsistent, preprint-only, or from the same code lineage as the code under test. & 3dTube, cavityFlexibleBottom, blobInTreacle \\
+		A & Analytical or semi-analytical solution of the stated continuum problem, with any numerical error of its own (e.g.\ collocation) controlled to near round-off. & ring added-mass problem, Womersley tube \\
+		B & Independently computed numerical solution, by a different code and with its own convergence evidence, either of the same problem or of a problem with a small, explicitly identified model-form difference whose effect on the QoIs is quantified and small compared with the numerical errors of interest. & Hron--Turek FSI1 (Featflow, six levels; and a solution with an independent solid code, preCICE--CalculiX); Hron--Turek FSI3 (\citet{Failer2020}, six levels); collapsible channel (oomph-lib, beam wall model); Mok lid-driven cavity (Kratos, group-B definition, outlet condition) \\
+		C & Published benchmark value whose own discretisation error is only partly quantified. & Hron--Turek FSI2 (Featflow level 4); beam in cross-flow (\citet{Richter2012}, corrected inflow) \\
+		C-weak & As C, but digitised from figures, single-mesh, mutually inconsistent, preprint-only, or from the same code lineage as the code under test. & 3-D pressure-pulse tube, flexible-bottom cavity, blob in treacle \\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -94,7 +94,7 @@ A grid-convergence index~\citep{Roache1994, Roache1998, Celik2008},
 	\mathrm{GCI} = F_s\,\frac{|f_1 - f_2|}{r^{p} - 1}, \qquad F_s = 1.25,
 	\label{eq:gci}
 \end{equation}
-is reported only for self-convergence studies that satisfy the same criterion (here the Hessenthaler solid refinement and the zero-flow calibration). Where a sequence of four or more levels is monotone with a stable but sub-nominal observed order (Hron--Turek FSI1), the Richardson value with that order and the GCI of the finest level are given as conditional indicators, labelled as such; the GCI is centred on the finest-level value.
+is reported only for self-convergence studies that satisfy the same criterion (here the solid refinement and the zero-flow calibration of the Hessenthaler flap). Where a sequence of four or more levels is monotone with a stable but sub-nominal observed order (Hron--Turek FSI1), the Richardson value with that order and the GCI of the finest level are given as conditional indicators, labelled as such; the GCI is centred on the finest-level value.
 Where a sequence does not satisfy it, a GCI computed with the observed order is labelled a provisional indicator, and values computed with an assumed order are labelled as such; neither is a bound or a confidence interval (for uncertainty estimates from data outside the asymptotic range, see~\citet{Eca2014}).
 
 \paragraph{Iterative and coupling errors.}
@@ -106,18 +106,18 @@ The meaning of the tolerance depends on the convergence test.
 A test that can be met by a measure normalised by the \emph{total} interface displacement, such as the legacy $\min(r_1, r_2)$ of Eq.~\eqref{eq:coupling_residuals}, does not bound the reduction of the interface residual within a step; in slowly varying phases it can accept steps that are far from converged, and the resulting error accumulates over many steps.
 A steadiness or periodicity check on a QoI cannot detect such an accumulated error, because the solution can be steady (or drift slowly) at the wrong value.
 We therefore recommend that verification runs require every residual measure to meet the tolerance ($\max(r_1, r_2)$), record the residuals at acceptance, and are not restarted from states computed with a weaker test, since these retain their history.
-The campaigns in progress (Sections~\ref{sec:beam} and~\ref{sec:hessenthaler}) use the strict test; the corrected Hron--Turek FSI3 sequence (Section~\ref{sec:fsi23}) and the cavity (Section~\ref{sec:cavity}) were computed or rerun with it; the other completed studies of Sections~\ref{sec:exact_refs}--\ref{sec:classical} used the legacy test.
+The campaigns in progress (Sections~\ref{sec:beam} and~\ref{sec:hessenthaler}) use the strict test; the corrected Hron--Turek FSI3 sequence (Section~\ref{sec:fsi23}) and the cavity (Section~\ref{sec:cavity}) were computed or rerun with it; the other completed studies of Sections~\ref{sec:exact_refs}--\ref{sec:classical} used the default (legacy) test.
 An audit of the solver logs (\texttt{paper-data/r1\_audit/}) shows that the legacy test did accept iterations with $r_1$ above the tolerance in every benchmark for which legacy-test runs were audited, and not only during start-up.
-In the transient cases this happened in $21$--$36\%$ of the steps of ringAddedMass and about $31\%$ of those of 3dTube ($r_1$ at most $12$ times the tolerance), and in almost every step of the Hron--Turek FSI2 study and of the earlier, legacy-test FSI3 sequence (median $r_1$ about ten times the tolerance) and of the Robin--Neumann womersleyTube runs ($r_1\leq60$ times the tolerance); the IQN-ILS womersleyTube run was unaffected.
-The steady problems are the worst: in the legacy-test FSI1 runs, since replaced by the strict-test four-level study, $r_1$ reached $0.72$ at acceptance, and in the earlier legacy-test cavityFlexibleBottom runs, since replaced by the strict-test reruns reported in Section~\ref{sec:cavity}, pseudo-time steps were accepted after a single iteration with $r_1=1$, i.e.\ with no reduction of the interface mismatch, because $r_2$ was already below the tolerance.
+In the transient cases this happened in $21$--$36\%$ of the steps of the ring added-mass problem and about $31\%$ of those of the 3-D pressure-pulse tube ($r_1$ at most $12$ times the tolerance), and in almost every step of the Hron--Turek FSI2 study and of the baseline-set-up FSI3 sequence (median $r_1$ about ten times the tolerance) and of the Robin--Neumann runs of the Womersley tube ($r_1\leq60$ times the tolerance); the IQN-ILS run of the Womersley tube was unaffected.
+The steady problems are the worst: in a two-level FSI1 study with the legacy test (the four-level study of Section~\ref{sec:fsi1} uses the strict test), $r_1$ reached $0.72$ at acceptance, and in legacy-test runs of the flexible-bottom cavity (the results of Section~\ref{sec:cavity} are checked by strict-test reruns), pseudo-time steps were accepted after a single iteration with $r_1=1$, i.e.\ with no reduction of the interface mismatch, because $r_2$ was already below the tolerance.
 No step of the strict-test FSI3 production runs ($\approx7\times10^{4}$ steps) was accepted with $r_1$ above the tolerance.
-For collapsibleChannel, FSI2 and mokLidDrivenCavity the logs of the reported studies were no longer available, and runs with the same set-up and coupling settings were audited instead.
+For the collapsible channel, FSI2 and the Mok lid-driven cavity the logs of the reported studies were no longer available, and runs with the same set-up and coupling settings were audited instead.
 For the legacy studies the coupling tolerance is therefore not a bound on the iterative error; the iterative error is estimated from the strict-test tolerance sweeps at fixed discretisation (Section~\ref{sec:iterative_errors}), and the coupling-algorithm comparisons reported with each case are a consistency check, not a bound.
 
 \paragraph{Code, build and platform.}
 The code under test is the compiled executable, not the source alone.
 The compiler, its optimisation level, the OpenFOAM release and the platform are therefore part of the verification configuration and are recorded with each result.
-Replicating a calculation on a second platform or build is inexpensive and can expose defects that no refinement study on one platform reveals: in 3dTube (Section~\ref{sec:3dtube}) a cross-platform difference that looked like a platform effect was an aliasing defect that only an optimised build exposed.
+Replicating a calculation on a second platform or build is inexpensive and can expose defects that no refinement study on one platform reveals: in the 3-D pressure-pulse tube (Section~\ref{sec:3dtube}) a cross-platform difference that looked like a platform effect was an aliasing defect that only an optimised build exposed.
 A symmetry that the discrete problem should preserve, or invariance to the domain decomposition, is a similarly cheap check on the interface transfer.
 
 \paragraph{Proportionate control of error sources.}
@@ -136,9 +136,9 @@ Errors are relative, $(f - f_\mathrm{ref})/|f_\mathrm{ref}|$, or normalised by a
 Periodic statistics are taken over complete periods after the start-up transient, with the period-to-period change checked to be small compared with the reported errors: forced responses through the complex Fourier coefficient at the forcing frequency, self-excited oscillations through the benchmark mean, $(\max+\min)/2$ over the window, the amplitude (half the mean peak-to-peak range) and the frequency~\citep{Turek2006} (a time mean, where used, is named as such), and free vibrations through zero-crossing frequencies.
 Transient problems are compared on characteristic events (first trough, wavefront arrival) as well as full histories.
 The drivers and reference files that produce these quantities are described in Section~\ref{sec:infrastructure}.
-\paragraph{Code, build and platform.}
-Table~\ref{tab:provenance} records, for each result, the solids4foam commit, the OpenFOAM release, the compiler and the platform, and whether the build contains the fixes of solids4foam PR~\#546 (the two defects of Section~\ref{sec:3dtube}).
-Results computed before that PR are affected only where an interface is three-dimensional and transferred non-conformally, or where the aliasing defect can occur (\texttt{-O3} builds); this is checked case by case in Section~\ref{sec:benchmark_suite}.
+\paragraph{Provenance.}
+Table~\ref{tab:provenance} records, for each result, the solids4foam commit, the OpenFOAM release, the compiler and the platform, and whether the build contains the corrections of the two defects of Section~\ref{sec:3dtube}.
+Results computed without these corrections are affected only where an interface is three-dimensional and transferred non-conformally, or where the aliasing defect can occur (\texttt{-O3} builds); this is checked case by case in Section~\ref{sec:benchmark_suite}.
 
 \todo{Hessenthaler row: chamfered-mesh campaign (withdrawn); the feature-edge campaign uses solids4foam \texttt{517a44921}, OpenFOAM-v2512. Also update the Hessenthaler example in the Richardson/GCI paragraph above.}
 \begin{table}[htbp]
@@ -156,7 +156,7 @@ Results computed before that PR are affected only where an interface is three-di
 		collapsibleChannel & \texttt{c59dbf84a}$^a$; mesh-study figure \texttt{a421f063d}$^\dagger$ & v2412; v2512 & GCC 11.4 \texttt{-O3}; Clang \texttt{-O3}; GCC 13.3 \texttt{-O2}$^\ddagger$ & Linux; macOS (static study); MeluXina & before; after \\
 		Hron--Turek FSI1 (four levels) & \texttt{a421f063d} & v2512 & GCC 13.3 \texttt{-O2}$^\ddagger$ & MeluXina & after \\
 		Hron--Turek FSI2 & \texttt{18a052637}$^a$ & v2412 & Clang \texttt{-O3} & macOS & before \\
-		FSI3, tutorial set-up and diagnostics & \texttt{d49552f4c} and diagnostic branches & v2512 & GCC 11.4, \texttt{-O3} & Linux & before; A/B identical \\
+		FSI3, baseline set-up and diagnostics & \texttt{d49552f4c} and diagnostic branches & v2512 & GCC 11.4, \texttt{-O3} & Linux & before; A/B identical \\
 		FSI3, corrected 1x$'$--4x$'$ & \texttt{206437983} (after \#671) & v2512 & Clang \texttt{-O3} (1x$'$, 2x$'$); GCC \texttt{-O3} (4x$'$) & macOS; Linux (UCD Sonic) & after \\
 		FSI3, corrected 8x$'$ (before \#671) & \texttt{30d6e22f3} with PR \#562 & v2512 & GCC 13.3 \texttt{-O2}$^\ddagger$ & MeluXina & before; 2-D argument \\
 		3dTube levels 1--2 & \texttt{c45b30b7e} & v2512; v2412 & GCC 11.4 \texttt{-O3}; GCC 13.3 \texttt{-O2}$^\ddagger$ & Linux; MeluXina & fixes before merge \\
