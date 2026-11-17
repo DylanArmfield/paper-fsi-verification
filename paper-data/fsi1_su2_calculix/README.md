@@ -99,7 +99,63 @@ SU2's incompressible solver uses artificial compressibility with a preconditione
 
 - At the default β a step after a sizeable plate movement needs about 2 200 inner iterations to reach 1e-9, 11 times the 200-iteration cap.
 - A larger β converges faster but to a different solution: the converged drag of this step rises by 33 % from β = 4.1 to 2000.
-- All results here use the default β. For FSI1 this is sufficient because the reported values are the steady end state (next section). For an unsteady case such as FSI3, where the transient is the result, every inner solve would have to converge at the default β, at roughly ten times the cost per step; FSI3 with SU2 is out of scope for this reason.
+- All results here use the default β. For FSI1 this is sufficient because the reported values are the steady end state (next section). For an unsteady case such as FSI3, where the transient is the result, every inner solve would have to converge at the default β, at roughly ten times the cost per step; FSI3 with SU2 is out of scope for this reason. The rigid-flag CFD3 runs in the next section measure what β does to a shedding flow.
+
+## CFD3 (rigid flag, unsteady): β in a shedding flow
+
+The CFD3 problem (the FSI3 fluid with a rigid flag) solved by SU2 alone, to measure the effect of β when the transient is the result. Everything is in `cfd3/`.
+
+**Set-up** (`cfd3/case/cfd3.cfg`, `cfd3/scripts/setup_cfd3.py`):
+- The FSI1 meshes above at 1x and 2x (5 336 and 21 344 cells, node-identical to the paper's CFD3 sequence), with the flag a rigid no-slip wall.
+- ρ = 1000 kg/m³, μ = 1 Pa s. Parabolic inlet with a 3 m/s maximum (mean 2 m/s), impulsive start from u = (2, 0) m/s.
+- Fluid settings as FSI1 (FDS + MUSCL, no limiter; BDF2 dual time stepping; implicit Euler in pseudo-time, CFL 1000, FGMRES + ILU). Δt = 1e-3 s at both levels.
+- Inner solves stop when the RMS residuals of pressure and both velocity components are below 1e-9, or at a cap of 40, 200 or 300 inner iterations (per run, below).
+- Drag and lift on cylinder + flag in N/m (force reference ½ρU²·A_ref = 1).
+- **Protocol.** From the impulsive start, inner solves do not converge in an affordable number of iterations: in a 1x pilot every step hit a 1 000-iteration cap with rms[u] at about 1e-5.5 (`histories/pilot-L1.csv`, 45 steps, cancelled). So each level was first run to t = 8 s with 40 inner iterations per step (`dev-*-cap40`, deliberately under-converged). Runs with the inner solves converged (or at a 200–300 cap) were then restarted from the two BDF2 levels at t = 8 s with the β and scheme under test.
+- **Evaluation** (`cfd3/scripts/evaluate_cfd3.py`, `osc_growth.py`, `cfd3_table.py`):
+  - For shedding runs, the Turek–Hron quantities over the last 4 complete lift periods: mean = (max + min)/2, amplitude = (max − min)/2, frequency = 1/period, with extrema by parabolic interpolation.
+  - For decaying runs, the growth per shedding period: the lift minus its moving average over one period, half-range per 0.5 s window, a least-squares fit of log(half-range) against time, expressed per Featflow period (0.2275 s).
+
+**1x: SU2 does not shed** (restarts from the cap-40 state at t = 8 s, run to t = 11 s, inner cap 200):
+
+| Run | β factor | Scheme | Lift oscillation per period | Lift half-range, first → last 0.5 s (N/m) | Steady drag (N/m) | Steady lift (N/m) |
+|---|---:|---|---:|---|---:|---:|
+| `diag-L1-b4.1` | 4.1 (default) | FDS | none (steady) | 3e-5 → 1e-4 (solver noise) | 461.00 | −9.81 |
+| `diag-L1-b20` | 20 | FDS | × 0.50 | 3.7 → 0.04 | 488.82 | 23.93 |
+| `diag-L1-b100` | 100 | FDS | × 0.27 | 3.1 → 6e-4 | 561.54 | 39.50 |
+| `diag-L1-jst` | 4.1 | JST | × 0.25 | 1.6 → 2e-4 | 467.74 | 33.45 |
+
+- At the default β the cap-40 start-up run already decays (× 0.74 per period, from a 1.1 N/m oscillation at t = 0.5–1 s to 1.5e-4 N/m at t = 7–7.5 s), and the converged continuation stays steady (inner solves converge in 16 iterations on average). Its decay rate with converged inner solves is therefore not measured; the flow is steady either way.
+- The β = 20 and 100 and JST runs start from the β = 4.1 steady state; the change of β or scheme perturbs the flow, and the perturbation rings down at the shedding frequency. A larger β damps it faster.
+- β also moves the steady solution: drag 461.0 → 488.8 → 561.5 N/m (+6 % and +22 %) from β = 4.1 to 20 and 100.
+- In these three runs the inner solves sit at the 200 cap: median rms[u] 1e-6.7 to 1e-7.3 over the run and 1e-7.2 to 1e-8.1 in the last second.
+- For comparison, solids4foam at 1x (Δt = 1e-3 s) sheds with a lift amplitude of 296 N/m (`../hronturek_cfd3_runs.csv`).
+
+**2x: SU2 sheds.** Restarts from the cap-40 state at t = 8 s (already shedding), run to t = 10 s with a 300-iteration cap. Values over the last 4 lift periods (t ≈ 9.06–9.97 s):
+
+| Run | β factor | Drag mean ± amp. (N/m) | Lift mean ± amp. (N/m) | f (Hz) | Lift oscillation per period |
+|---|---:|---|---|---:|---:|
+| `conv-L2-b4.1` | 4.1 (default) | 446.15 ± 3.24 | −18.04 ± 351.0 | 4.3859 | × 1.001 (periodic) |
+| `conv-L2-b20` | 20 | 452.11 ± 2.44 | −18.95 ± 270.3 | 4.3553 | × 0.974 (still decaying) |
+| `dev-L2-cap40` (40 inner its) | 4.1 | 446.42 ± 3.64 | −18.45 ± 361.4 | 4.3865 | |
+| solids4foam 2x, Δt 5e-4 s | | 441.81 ± 5.53 | −18.98 ± 424.4 | | |
+| Featflow | | 439.45 ± 5.62 | −11.89 ± 437.81 | 4.3956 | |
+
+- **β is part of the discretisation here too.** From β = 4.1 to 20 the lift amplitude falls by 23 % (351.0 → 270.3 N/m, and still decaying), the drag mean rises by 1.3 % and the frequency falls by 0.7 %.
+- **SU2 is more dissipative than solids4foam on the same nodes.** Its 2x lift amplitude (351 N/m, −17 % against solids4foam 2x) lies between solids4foam's 1x (296) and 2x (424). The frequency is within 0.22 % of Featflow.
+- **Inner convergence.** At 2x the inner solves stop at the 300 cap at every step, at a median rms[u] of 1e-6.5 (β = 4.1) and 1e-6.9 (β = 20), and rms[p] of 1e-7.6 and 1e-8.2. The 40-iteration run differs from the 300-iteration run by 3.0 % in lift amplitude and 0.06 % in drag mean, so the remaining inner-iteration error is probably below that but not zero.
+- **Time step.** Δt = 1e-3 s at 2x, not the 5e-4 s of the paper's matched sequence. solids4foam's 2x lift amplitude changes by 0.2 % from Δt = 5e-4 to 2.5e-4 s; the Δt sensitivity of SU2 was not measured.
+
+**Cost** (`cfd3/cfd3_su2.csv`):
+
+| Run | Cores | Wall clock (s) | s per step | Core-hours per simulated second |
+|---|---:|---:|---:|---:|
+| 1x, 200 inner its (`diag-L1-b20`) | 4 | 6 043 | 2.01 | 2.2 |
+| 2x, 300 inner its (`conv-L2-b4.1`) | 16 | 8 668 | 4.33 | 19.3 |
+| 2x, 40 inner its (`dev-L2-cap40`) | 8 | 11 518 | 1.44 | 3.2 |
+| solids4foam 2x, Δt 5e-4 s (`../hronturek_cfd3_runs.csv`) | 8 | 5 136 for 25 s | 0.10 | 0.46 |
+
+At 2x SU2 costs about 40 times more than solids4foam per simulated second, with half as many time steps and inner solves that are still not converged to 1e-9. A coupled SU2 FSI3 would multiply this by the coupling iterations per window and need a finer mesh to shed at the right amplitude: roughly a day or more per coupled run.
 
 ## Coupled protocol: what is converged and what is not
 
@@ -144,6 +200,12 @@ The cost is almost all SU2 inner iterations during the transient (mean 70 / 60 /
   - `evaluate_fsi1.py`, `study_table.py`: the evaluation. `split_drag.py`, `inner_cap_stats.py`, `check_su2_mesh.py`: the diagnostics above. `prescribed.py`: SU2 alone with a prescribed or recorded plate motion (checkpoint and β tests).
   - `env-su2-precice.sh`, `su2-7.5.1-cstdint.patch`: the environment and build fix.
 - `logs/<run>/`: the Slurm output (`slurm.out`), case summary, exit statuses, wall-clock times, the preCICE coupling-iteration log (`precice-Solid-iterations.log`), the preCICE watch-point log at point A (`precice-Solid-watchpoint-PointA.log`; its time counts from the start of the coupled stage, so add 2 s to match `histories/`), and the last lines of the solver logs. The repository `.gitignore` excludes `*.out` and `*.log`, so these files were added with `git add -f`. Full solver logs and field data are available on request.
+- `cfd3/`: the CFD3 runs of the section above.
+  - `cfd3_su2.csv`: one row per run, with settings, Slurm job, cores, wall clock, inner-iteration statistics, the lift-oscillation growth per period, the end values and, for shedding runs, the 4-period quantities with their deviations from Featflow and from solids4foam on the same mesh. Made by `scripts/cfd3_table.py` from `histories/` and `logs/`.
+  - `histories/<run>.csv`: t, drag, lift (N/m), inner iterations and the final log10 RMS residuals of every time step. t = (time iteration + 1)·Δt is the physical time of the step's solution (SU2 resets its own time counter on a restart).
+  - `case/cfd3.cfg`: the SU2 template; `scripts/setup_cfd3.py` fills it and copies the BDF2 restart files for a continuation; `scripts/run_cfd3.sh` is the Slurm script.
+  - `scripts/evaluate_cfd3.py`, `osc_growth.py`: the evaluation, on a SU2 case folder or a published history.
+  - `logs/<run>/`: Slurm output, case summary, exit status, wall clock and the SU2 screen log (`su2.log`, every 100th step). `pilot-L1` is the cancelled impulsive-start pilot.
 
 To reproduce one level (Slurm; from a study directory holding `scripts/` and `case/` copied from here, with `paper-data/fsi1_precice_calculix` available for the blockMesh, OpenFOAM for `blockMesh`, and the paths in `scripts/env-su2-precice.sh` edited):
 
@@ -152,3 +214,17 @@ python3 scripts/setup_case.py 1 cases/L1
 sbatch --ntasks=7 --mem=16G --time=02:00:00 --export=ALL,CASE=cases/L1 scripts/run-case.sh
 python3 scripts/evaluate_fsi1.py cases/L1 --csv results.csv --hist-dir histories
 ```
+
+To reproduce a CFD3 run (from `cfd3/`, with a 1x or 2x mesh made by `../scripts/make_fluid_mesh.py` as for FSI1):
+
+```bash
+python3 ../scripts/make_fluid_mesh.py ../../fsi1_precice_calculix/case/fluid-openfoam/system/blockMeshDict 2 fsi1_L2.su2
+python3 scripts/setup_cfd3.py 2 fsi1_L2.su2 cases/dev-L2-cap40 --dt 1e-3 --t-end 8 --inner-iter 40 --write-every 1000
+sbatch --ntasks=8 --mem=16G --time=06:00:00 --export=ALL,CASE=cases/dev-L2-cap40 scripts/run_cfd3.sh
+python3 scripts/setup_cfd3.py 2 fsi1_L2.su2 cases/conv-L2-b4.1 --dt 1e-3 --t-end 10 --inner-iter 300 --write-every 500 \
+    --restart-from cases/dev-L2-cap40 --restart-time 7.999
+sbatch --ntasks=16 --mem=32G --time=06:00:00 --export=ALL,CASE=cases/conv-L2-b4.1 scripts/run_cfd3.sh
+python3 scripts/evaluate_cfd3.py cases/conv-L2-b4.1 --cap 300
+```
+
+`--dt 1e-3` is needed at 2x (the script's default is the matched-sequence 5e-4 s). `--restart-time 7.999` selects the restart files of time iterations 7998 and 7999, i.e. the solution at t = 8 s.
