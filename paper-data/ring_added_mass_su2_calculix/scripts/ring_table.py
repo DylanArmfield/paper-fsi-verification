@@ -8,8 +8,8 @@ Writes (in the package folder):
                           SU2 inner iterations and the median final log10 rms residuals of the SU2 solves
   ring_mesh_study.csv     ratio error at F = 1, 2, 4 (100 steps per period), observed order, Richardson ratio
   ring_time_study.csv     dry and moderate level, F = 2, 25 / 50 / 100 steps per period
-  ring_acceptance.csv     the solids4foam verification acceptance criteria (reference JSON tolerances) as
-                          they apply to this solid (see README)
+  ring_acceptance.csv     the solids4foam verification acceptance criteria with the reference JSON tolerances
+                          (see README)
   beta/beta_single_step.csv  BETA_FACTOR single-step check (beta/logs/*.log)
 
 Usage (from the package folder):  python3 scripts/ring_table.py
@@ -31,9 +31,12 @@ TOL = ev.REF["tolerances"]
 RUNS = ["dry-F1", "dry-F2", "dry-F4", "dry-F2-spp25", "dry-F2-spp50",
         "weak-F1", "weak-F2", "weak-F4", "moderate-F1", "moderate-F2", "moderate-F4",
         "moderate-F2-spp25", "moderate-F2-spp50", "moderate-F1-beta1e5", "moderate-F1-beta1e8",
-        "strong-F1", "strong-F2", "strong-F4", "strong-F1-reuse10"]
+        "strong-F1", "strong-F2", "strong-F4", "strong-F1-reuse10",
+        "moderate-F1-beta1e5-inner1000", "moderate-F1-inner1000", "moderate-F1-beta1e8-inner1000",
+        "moderate-F2-beta1e5", "moderate-F2-beta1e8"]
 LEVELS = ["weak", "moderate", "strong"]
 COUPLING_CAP = 50   # preCICE max-iterations
+NOT_CONVERGED = "not met because the C3D8I solid is not converged in space"
 BETA_LOGS = {"n_50.log": (4.1, 50), "n_300.log": (4.1, 300), "n_2000.log": (4.1, 2000),
              "v_b1e4.log": (1e4, 300), "v_b1e6.log": (1e6, 300),
              "v_b1E5.log": (1e5, 1000), "v_b1E6.log": (1e6, 1000), "v_b1E7.log": (1e7, 1000),
@@ -93,6 +96,8 @@ def run_row(run):
         r.update(su2_solves=len(S), su2_solves_at_inner_cap=sum(int(s["inner_iters"]) >= r["su2_inner_cap"] for s in S))
         for c in ("p", "u", "v"):
             r[f"su2_median_final_log10_rms_{c}"] = statistics.median(float(s[f"log10_rms_{c}"]) for s in S)
+        last = {int(s["window"]): s for s in S}   # the last coupling iteration of each window (the accepted solve)
+        r["su2_median_final_log10_rms_p_last_coupling_iter"] = statistics.median(float(s["log10_rms_p"]) for s in last.values())
     return r
 
 
@@ -107,9 +112,12 @@ def main():
         p = math.log2((e[0] - e[1]) / (e[1] - e[2]))
         rr = rt[2] + (rt[2] - rt[1]) / (2 ** p - 1)
         ex = ev.REF["exact"]["levels"][lev]["ratio"]
+        thin = ev.REF["exact"]["levels"][lev]["ratioThinRing"]
         mesh.append(dict(level=lev, F1_ratio_err_pct=e[0], F2_ratio_err_pct=e[1], F4_ratio_err_pct=e[2], observed_order=p,
                          ratio_richardson=rr, ratio_exact=ex, richardson_ratio_err_pct=100 * (rr / ex - 1),
+                         ratio_thin_ring=thin, F4_ratio_thin_ring_err_pct=100 * (rt[2] / thin - 1),
                          F4_omega_err_pct=rows[f"{lev}-F4"]["omega_err_pct"],
+                         F2_to_F4_omega_change_pct=100 * (rows[f"{lev}-F4"]["omega"] / rows[f"{lev}-F2"]["omega"] - 1),
                          F2_loss_per_period_pct=rows[f"{lev}-F2"]["loss_per_period_pct"],
                          F4_loss_per_period_pct=rows[f"{lev}-F4"]["loss_per_period_pct"],
                          coupling_iters_mean_F4=rows[f"{lev}-F4"]["coupling_iters_mean"]))
@@ -143,6 +151,8 @@ def main():
         chk(f"ratio error decreases under refinement, {m['level']}", "", "", dec)
         chk(f"observed mesh order of the ratio, {m['level']}", m["observed_order"], TOL["minMeshOrder"],
             m["observed_order"] >= TOL["minMeshOrder"], note="solids4foam: standard-solid criterion")
+        chk(f"ratio error against thin-ring theory, finest mesh (F4), {m['level']}", m["F4_ratio_thin_ring_err_pct"],
+            100 * TOL["ratioThinRing"], abs(m["F4_ratio_thin_ring_err_pct"]) <= 100 * TOL["ratioThinRing"])
     for lev in ["dry"] + LEVELS:
         v = rows[f"{lev}-F4"]["omega_err_pct"]
         chk(f"frequency error, finest mesh (F4), 100 steps/period, {lev}", v, 100 * TOL["omega"], abs(v) <= 100 * TOL["omega"])
@@ -156,10 +166,12 @@ def main():
         chk(f"observed time order of the frequency, F2, {t['level']}", t["observed_time_order"], TOL["minTimeOrder"],
             t["observed_time_order"] >= TOL["minTimeOrder"])
         chk(f"time-extrapolated frequency error, F2, {t['level']}", t["omega_time_richardson_err_pct"], 100 * TOL["omegaExtrapolated"],
-            False, applies="no", note="contains the F2 spatial error of the C3D8I solid; the solids4foam tolerance assumes "
-            "a solid converged in space on every mesh (its high-order solid)")
-    chk("frequency change between meshes", "", 100 * TOL["meshChange"], False, applies="no",
-        note="high-order-solid criterion; the C3D8I solid is not converged in space on F1 (dry F1 error in ring_su2_calculix.csv)")
+            abs(t["omega_time_richardson_err_pct"]) <= 100 * TOL["omegaExtrapolated"],
+            note=NOT_CONVERGED + "; the extrapolated value contains the F2 spatial error")
+    for lev in ["dry"] + LEVELS:
+        v = 100 * (rows[f"{lev}-F4"]["omega"] / rows[f"{lev}-F2"]["omega"] - 1)
+        chk(f"frequency change between meshes, F2 to F4, {lev}", v, 100 * TOL["meshChange"], abs(v) <= 100 * TOL["meshChange"],
+            note=NOT_CONVERGED)
     chk("Robin-Neumann and IQN-ILS frequencies agree", "", 100 * TOL["couplingAgreement"], False, applies="no",
         note="only IQN-ILS was run")
     write(ROOT / "ring_acceptance.csv", acc)

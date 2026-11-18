@@ -66,31 +66,47 @@ The solids4foam verification criteria, with the tolerances from the reference JS
 - **Met:**
   - ratio error at the finest mesh within 0.1 % at all three levels, decreasing under refinement;
   - observed mesh order of the ratio at least 1.5 (1.91–1.92);
+  - ratio error against thin-ring theory at the finest mesh within 0.25 % (+0.02 / +0.11 / +0.17 % for weak / moderate / strong);
   - frequency error at the finest mesh within 0.3 % (dry and all three levels);
   - amplitude loss at F2 below 2 % per period (0.05 / 0.24 / 0.52 %), with no run growing;
   - observed time order at least 1.5 (1.98 dry, 1.93 moderate).
-- **Not applicable to this solid:**
-  - the time-extrapolated frequency within 0.1 % (+0.12 % dry and +0.32 % moderate at F2) and the 0.1 % frequency change between meshes. Both assume a solid that is converged in space on every mesh (the solids4foam high-order solid), and the extrapolated values here contain the F2 spatial error of the C3D8I ring. solids4foam checks its standard solid on the mesh order and the ratio instead, as done here.
-  - the Robin–Neumann against IQN-ILS agreement: only IQN-ILS was run.
+- **Not met, because the C3D8I solid is not converged in space:**
+  - the time-extrapolated frequency within 0.1 %: +0.12 % (dry) and +0.32 % (moderate) at F2. The extrapolation removes the time error only, so these values contain the F2 spatial error of the ring.
+  - the frequency change between meshes within 0.1 %: from F2 to F4 the frequency changes by −0.15 % (dry) and −0.17 / −0.25 / −0.34 % (weak / moderate / strong).
+  - Both criteria assume a solid that is converged in space on every mesh (the solids4foam high-order solid). solids4foam's standard solid is checked on the mesh order and the ratio instead, which are met here.
+- **Not tested:** the Robin–Neumann against IQN-ILS agreement, because only IQN-ILS was run.
 
 ## SU2 `BETA_FACTOR`
 
 SU2's incompressible solver uses artificial compressibility with β² = `BETA_FACTOR` · max|u|². Here max|u| is the 1.5 mm/s initial ring velocity, so the default β is tiny and the pseudo-time solve stalls.
 
-- **Single-step check** (`beta/`, `scripts/beta_single_step.py`, moderate level, F1):
+- **Single-step start-up check** (`beta/`, `scripts/beta_single_step.py`, moderate level, F1). It was used to choose a β at which the SU2 solve converges; it is not evidence about the added mass.
   - the interface is moved by one time step of the initial ring velocity from the potential-flow state, and the n = 2 modal interface force is printed (`beta/beta_single_step.csv`);
-  - at the default β (4.1) the pressure residual stalls (log10 rms[p] −2.6 / −3.0 / −4.0 after 50 / 300 / 2000 inner iterations), and the modal force is 1 / 5 / 7 % of the value at β 1e6;
-  - from β 1e5 upwards, rms[p] reaches its floor of −6.96 (closed annulus: the pressure level floats). The modal force is still not independent of β: 0.96 / 1.00 / 1.02 / 1.03 / 1.21 times the β 1e6 value at β 1e5 / 1e6 / 1e7 / 1e8 / 1e10.
-- **Coupled runs** (moderate level, F1, β 1e5 / 1e6 / 1e8):
-  - the ratio error is +0.571 / +0.557 / +0.553 %, so β moves the ratio by only 0.02 %;
-  - the amplitude loss is 3.5 / 2.3 / 10.0 % per period and does not settle.
+  - at the default β (4.1) the pressure residual stalls (log10 rms[p] −2.6 / −3.0 / −4.0 after 50 / 300 / 2000 inner iterations), and the modal force is 1 / 5 / 7 % of the value at β 1e6, so the default β cannot be used;
+  - from β 1e5 upwards, rms[p] reaches its floor of −6.96 (closed annulus: the pressure level floats). The single-step force still changes with β: 0.96 / 1.00 / 1.02 / 1.03 / 1.21 times the β 1e6 value at β 1e5 / 1e6 / 1e7 / 1e8 / 1e10. This change, about 4 % between β 1e5 and 1e8, does not appear in the coupled ratio, which moves by 0.02 % (below). The single-step force is therefore not a measure of the added mass.
+- **Coupled runs** (moderate level, 100 steps per period). At F1 the β runs differ in the residual the inner solves reach, as well as in β, so F1 was repeated with 1000 inner iterations instead of 300, and β 1e5 / 1e8 were also run at F2:
+
+  | Run | β 1e5 | β 1e6 | β 1e8 |
+  |---|---:|---:|---:|
+  | F1, 300 inner iterations: ratio error | +0.571 % | +0.557 % | +0.553 % |
+  | F1, 300 inner iterations: loss per period | 3.47 % | 2.28 % | 10.02 % |
+  | F1, 300: median final log10 rms[p], last coupling iteration | −6.71 | −7.48 | −8.58 |
+  | F1, 1000 inner iterations: ratio error | +0.568 % | +0.557 % | +0.553 % |
+  | F1, 1000 inner iterations: loss per period | 3.37 % | 2.26 % | 10.02 % |
+  | F1, 1000: median final log10 rms[p], last coupling iteration | −7.51 | −7.99 | −9.10 |
+  | F2, 300 inner iterations: ratio error | +0.149 % | +0.150 % | +0.162 % |
+  | F2, 300 inner iterations: loss per period | 0.44 % | 0.24 % | 0.91 % |
+
+  - **Inner iterations:** 1000 inner iterations lower the residual by 0.5–0.8 orders, but change the loss by at most 0.1 % per period and the ratio by at most 0.003 %. The β effect on the damping is therefore not an effect of the 300-iteration cap. All solves still stop at the cap.
+  - **Mesh refinement:** from F1 to F2 the loss falls by a factor 8–11 at every β, and the spread across β falls from 7.7 to 0.67 % per period. At β 1e6 the loss falls again to 0.03 % at F4. The β dependence of the damping is a discretisation error that decreases under refinement, but at F2 it has not disappeared: β 1e8 still damps about four times as much as β 1e6.
+  - **Ratio:** β moves the ratio by 0.02 % at F1 and 0.01 % at F2.
 - **Conclusion:** as in FSI1 and CFD3 (`../fsi1_su2_calculix`), β is part of the discretisation. All the production runs use β 1e6.
 
 ## Coupling
 
 - **Coupling iterations:** the mean per window at F4 is 7.2 (weak), 10.2 (moderate) and 22.9 (strong). No window reached the 50-iteration cap.
 - **IQN-ILS reuse at the strong level:** with 10 reused windows (`strong-F1-reuse10`), the coupling iterations rose from about 22 to 34 per window and SU2 diverged in window 130. Without reuse the strong level runs at every mesh.
-- **SU2 inner iterations:** every SU2 solve uses all 300 inner iterations, because the absolute stopping criterion (log10 rms −14) is below the pressure floor. The median final log10 rms[p] of the solves is −7.8 / −8.3 / −8.7 (weak), −7.0 / −7.4 / −7.9 (moderate) and −6.6 / −7.0 / −7.5 (strong) at F1 / F2 / F4. The coupling convergence is measured by preCICE on the interface data.
+- **SU2 inner iterations:** every SU2 solve uses all its inner iterations (300 in the production runs, 1000 in the `-inner1000` runs), because the absolute stopping criterion (log10 rms −14) is below the pressure floor. The median final log10 rms[p] of the solves is −7.8 / −8.3 / −8.7 (weak), −7.0 / −7.4 / −7.9 (moderate) and −6.6 / −7.0 / −7.5 (strong) at F1 / F2 / F4. The coupling convergence is measured by preCICE on the interface data.
 
 ## Cost
 
@@ -130,7 +146,8 @@ Most of the cost is the 300 inner iterations per SU2 solve, multiplied by the co
 - `dry-F{1,2,4}` and `dry-F2-spp{25,50}`;
 - `{weak,moderate,strong}-F{1,2,4}`;
 - `moderate-F2-spp{25,50}` and `moderate-F1-beta{1e5,1e8}`;
-- `strong-F1-reuse10`: stopped at window 130, exit 1.
+- `strong-F1-reuse10`: stopped at window 130, exit 1;
+- β and inner-iteration runs: `moderate-F1-inner1000`, `moderate-F1-beta{1e5,1e8}-inner1000` and `moderate-F2-beta{1e5,1e8}`.
 
 ## Reproduction
 
@@ -139,7 +156,7 @@ From this folder:
 ```
 W="--beta 1e6 --inner-iter 300 --inner-minval -14"
 python3 scripts/setup_case.py dry 2 cases/dry-F2                    # dry: add --spp 25 / 50 for the time study
-python3 scripts/setup_case.py moderate 2 cases/moderate-F2 $W       # weak / moderate; --spp 25 / 50; --beta 1e5 / 1e8
+python3 scripts/setup_case.py moderate 2 cases/moderate-F2 $W       # weak / moderate; --spp 25 / 50; --beta 1e5 / 1e8; --inner-iter 1000 (after $W)
 python3 scripts/setup_case.py strong 2 cases/strong-F2 $W --reuse 0
 sbatch --ntasks=1 --export=ALL,CASE=cases/dry-F2,STAGE=dry scripts/run_ring.sh
 sbatch --ntasks=5 --export=ALL,CASE=cases/moderate-F2,STAGE=coupled scripts/run_ring.sh   # F1 3, F2 5, F4 9 tasks
@@ -149,13 +166,13 @@ python3 scripts/ring_table.py
 ```
 
 **Checks made:**
-- `setup_case.py` regenerates the inputs of all 19 runs byte for byte. At the strong level, IQN reuse was set to 0 by editing the generated config (now `--reuse 0`), so one XML comment and the `CASE_INFO.txt` wording differ.
+- `setup_case.py` regenerates the inputs of all 24 runs byte for byte. At the strong level, IQN reuse was set to 0 by editing the generated config (now `--reuse 0`), so one XML comment and the `CASE_INFO.txt` wording differ.
 - Evaluating the published histories gives the case-folder results to the 7 digits of the tables.
 
 ## Limitations
 
-- **Iterative error:** the SU2 inner solves stop at the iteration cap, not at a residual criterion. The iterative error is controlled by the coupling tolerance on the interface data and by the residual floor, but it was not bounded by a looser- or tighter-tolerance run.
-- **β:** the frequency and ratio depend little on β (0.02 % between β 1e5 and 1e8), but the amplitude loss does, so the damping is not a converged SU2 result.
+- **Iterative error:** the SU2 inner solves stop at the iteration cap, not at a residual criterion. At moderate F1, raising the cap from 300 to 1000 changed the ratio by at most 0.003 % and the loss by at most 0.1 % per period; the coupling tolerance was not varied.
+- **β:** the frequency and ratio depend little on β (0.02 % at F1, 0.01 % at F2 between β 1e5 and 1e8). The amplitude loss depends on β; the dependence decreases under refinement but is still a factor of about four between β 1e6 and 1e8 at F2.
 - **Coverage:**
   - the time-step study covers the moderate level only, at F2;
   - only IQN-ILS was run;

@@ -1,0 +1,181 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+Parsing config file for zone 0
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+----------------- Physical Case Definition ( Zone 0 ) -------------------
+Incompressible Euler equations.
+Reading and writing ASCII SU2 native restart files.
+Read flow solution from: restart_flow.dat.
+Dimensional simulation.
+The reference area is 1 m^2.
+The semi-span will be computed using the max y(3D) value.
+The reference length is 1 m.
+Reference origin for moment evaluation is (0, 0, 0).
+Surface(s) where the force coefficients are evaluated: interface.
+
+Surface(s) plotted in the output file: interface.
+Input mesh file name: fluid.su2
+
+--------------- Space Numerical Integration ( Zone 0 ) ------------------
+Flux difference splitting (FDS) upwind scheme for the flow inviscid terms.
+Second order integration in space, with slope limiter.
+No slope-limiting method. 
+Gradient for upwind reconstruction: inverse-distance weighted Least-Squares.
+Gradient for viscous and source terms: inverse-distance weighted Least-Squares.
+
+--------------- Time Numerical Integration  ( Zone 0 ) ------------------
+Unsteady simulation, dual time stepping strategy (second order in time).
+Unsteady time step provided by the user (s): 0.0348193.
+Euler implicit method for the flow equations.
+FGMRES is used for solving the linear system.
+Using a ILU(0) preconditioning.
+Convergence criteria of the linear solver: 1e-08.
+Max number of linear iterations: 50.
+No CFL adaptation.
+Courant-Friedrichs-Lewy number:    1e+03
+
+------------------ Convergence Criteria  ( Zone 0 ) ---------------------
+Maximum number of solver subiterations: 1000.
+Maximum number of physical time-steps: 99999999.
+Begin convergence monitoring at iteration 0.
+Residual minimum value: 1e-14.
+Cauchy series min. value: 1e-10.
+Number of Cauchy elements: 100.
+Begin windowed time average at iteration 2.
+
+-------------------- Output Information ( Zone 0 ) ----------------------
+File writing frequency: 
++------------------------------------+
+|                     File| Frequency|
++------------------------------------+
+|                  RESTART|        25|
+|                 PARAVIEW|        25|
++------------------------------------+
+Writing the convergence history file every 0 inner iterations.
+Writing the convergence history file every 1 time iterations.
+Writing the screen convergence history every 1000 inner iterations.
+Writing the screen convergence history every 1 time iterations.
+The tabular file format is CSV (.csv).
+Convergence history file name: history.
+Forces breakdown file name: forces_breakdown.dat.
+Surface file name: surface_flow.
+Volume file name: flow.
+Restart file name: restart_flow.dat.
+
+------------- Config File Boundary Information ( Zone 0 ) ---------------
++-----------------------------------------------------------------------+
+|                        Marker Type|                        Marker Name|
++-----------------------------------------------------------------------+
+|                         Euler wall|                          interface|
+|                                   |                               wall|
++-----------------------------------------------------------------------+
+|           Deformable mesh boundary|                          interface|
++-----------------------------------------------------------------------+
+
+-------------------- Output Preprocessing ( Zone 0 ) --------------------
+
+WARNING: SURFACE_PRESSURE_DROP can only be computed for at least 2 surfaces (outlet, inlet, ...)
+
+Screen output fields: TIME_ITER, CUR_TIME, INNER_ITER, RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y, DRAG, LIFT
+History output group(s): TIME_ITER, CUR_TIME, INNER_ITER, RMS_RES, AERO_COEFF
+Convergence field(s): RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y
+Warning: No (valid) fields chosen for time convergence monitoring. Time convergence monitoring inactive.
+Volume output fields: COORDINATES, SOLUTION, PRIMITIVE, GRID_VELOCITY
+
+------------------- Geometry Preprocessing ( Zone 0 ) -------------------
+Two dimensional problem.
+624 grid points before partitioning.
+576 volume elements before partitioning.
+2 surface markers.
+48 boundary elements in index 0 (Marker = interface).
+48 boundary elements in index 1 (Marker = wall).
+Executing the partitioning functions.
+Building the graph adjacency structure.
+Calling ParMETIS... graph partitioning complete (26 edge cuts).
+Distributing ParMETIS coloring.
+Rebalancing vertices.
+Rebalancing volume element connectivity.
+Rebalancing markers and surface elements.
+676 vertices including ghost points. 
+600 interior elements including halo cells. 
+600 quadrilaterals.
+Establishing MPI communication patterns.
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+[... 36955 lines omitted; full log not published ...]
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         401|  1.3928e+01|           0|   -4.170158|   -3.090240|   -3.090874|    0.000022|   -0.000009|
+|         401|  1.3928e+01|         999|   -9.694933|   -8.684793|   -8.684775|    0.000024|   -0.000012|
+---[precice]  Mapping "Force" for t=13.927712810922015 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=13.927712810922015 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 17 (min: 1, max: 50), time-window 400 (max: 400), t 13.89289352889471, Dt 0.03481928202730504, max-dt 0.03481928202730504
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         401|  1.3928e+01|           0|   -4.170158|   -3.090240|   -3.090874|    0.000023|   -0.000008|
+|         401|  1.3928e+01|         999|   -9.676110|   -8.665971|   -8.665952|    0.000026|   -0.000009|
+---[precice]  Mapping "Force" for t=13.927712810922015 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=13.927712810922015 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 18 (min: 1, max: 50), time-window 400 (max: 400), t 13.89289352889471, Dt 0.03481928202730504, max-dt 0.03481928202730504
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         401|  1.3928e+01|           0|   -4.170158|   -3.090240|   -3.090874|    0.000023|   -0.000008|
+|         401|  1.3928e+01|         999|   -9.672878|   -8.662738|   -8.662720|    0.000026|   -0.000008|
+---[precice]  Mapping "Force" for t=13.927712810922015 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=13.927712810922015 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 19 (min: 1, max: 50), time-window 400 (max: 400), t 13.89289352889471, Dt 0.03481928202730504, max-dt 0.03481928202730504
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         401|  1.3928e+01|           0|   -4.170158|   -3.090240|   -3.090874|    0.000023|   -0.000008|
+|         401|  1.3928e+01|         999|   -9.673266|   -8.663126|   -8.663108|    0.000026|   -0.000008|
+---[precice]  Mapping "Force" for t=13.927712810922015 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=13.927712810922015 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 20 (min: 1, max: 50), time-window 400 (max: 400), t 13.89289352889471, Dt 0.03481928202730504, max-dt 0.03481928202730504
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         401|  1.3928e+01|           0|   -4.170158|   -3.090240|   -3.090874|    0.000023|   -0.000008|
+|         401|  1.3928e+01|         999|   -9.673757|   -8.663618|   -8.663599|    0.000026|   -0.000008|
+---[precice]  Mapping "Force" for t=13.927712810922015 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Time window completed
+---[precice]  Mapping "Displacement" for t=13.927712810922015 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  Reached end at: final time-window: 400, final time: 13.927712810922015
+
+------------------------- Solver Postprocessing -------------------------
+Deleted CNumerics container.
+Deleted CIntegration container.
+Deleted CSolver container.
+Deleted CIteration container.
+Deleted CInterface container.
+Deleted CGeometry container.
+Deleted CFreeFormDefBox class.
+Deleted CSurfaceMovement class.
+Deleted CVolumetricMovement class.
+Deleted CConfig container.
+Deleted nInst container.
+Deleted COutput class.
+-------------------------------------------------------------------------
+
+------------------------- Exit Success (SU2_CFD) ------------------------
+
+---[precice]  Close communication channels
