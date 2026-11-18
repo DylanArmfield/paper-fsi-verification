@@ -1,0 +1,2 @@
+ringAddedMass strong (rho_f 1400.0), mesh factor 1: F 1: fluid 12x48 = 576 quads, 624 nodes; solid 4x48 = 192 C3D8I; 48 interface points; V0 0.0015; potential A -2.256876e-04 B -1.142543e-03; omega_exact 0.768654491 rad/s, T 8.174264746 s, 100 steps/period, dt 8.174264746e-02 s, 400 steps, t_end 32.697058983 s; HHT alpha -0.05; coupling rel tol 1e-06; SU2 inner cap 300, minval -14.0, BETA_FACTOR 1000000.0
+; IQN-ILS time-windows-reused 0 (edited after setup)

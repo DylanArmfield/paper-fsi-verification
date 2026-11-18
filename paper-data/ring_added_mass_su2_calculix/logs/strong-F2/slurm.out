@@ -1,0 +1,6 @@
+Job 915 (ring-str-F2-b1e6-reuse0)  host lugh  CPUs 1  tasks 5  mem 8192 MB  GPU none  start 2026-11-17T14:33:59+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/ring-su2-calculix/cases/str-F2-b1e6-reuse0  stage coupled  coupled: SU2 ranks 4 + CalculiX 1
+ringAddedMass strong (rho_f 1400.0), mesh factor 2: F 2: fluid 24x96 = 2304 quads, 2400 nodes; solid 8x96 = 768 C3D8I; 96 interface points; V0 0.0015; potential A -2.256876e-04 B -1.142543e-03; omega_exact 0.768654491 rad/s, T 8.174264746 s, 100 steps/period, dt 8.174264746e-02 s, 400 steps, t_end 32.697058983 s; HHT alpha -0.05; coupling rel tol 1e-06; SU2 inner cap 300, minval -14.0, BETA_FACTOR 1000000.0; IQN-ILS time-windows-reused 0 (edited after setup)
+windows 400  mean coupling its 22.49  max 35  at-cap 0
+stage 2 exit 0 (solid 0, fluid 0), wall 4483 s
+Exit 0  end 2026-11-17T15:48:42+00:00  wall 4483 s

@@ -1,0 +1,27 @@
+** ringAddedMass ring: linear elastic (small displacements, no NLGEOM, as the tutorial's linear
+** geometry), E = 1 MPa, nu = 0.3, rho_s = 1000, plane strain via u_z = 0, free ring (no supports).
+** mesh.inp / initial_velocity.inp from scripts/make_ring.py (one C3D8I layer of depth 1 m: SU2 forces
+** are per metre).  Output: ovalling probes NP0 / NP90 printed to ring.dat every increment (no .frd:
+** in ccx the print and file frequencies are one setting).  Initial condition: n = 2 ovalling velocity, V0 = 1.5e-3 m/s, zero displacement.
+*INCLUDE, INPUT=mesh.inp
+*MATERIAL, NAME=RING
+*ELASTIC
+ 1.E6, 0.3
+*DENSITY
+ 1000.
+*SOLID SECTION, ELSET=Eall, MATERIAL=RING
+*BOUNDARY
+Nall, 3
+*INCLUDE, INPUT=initial_velocity.inp
+*STEP, INC=100000000
+*DYNAMIC, DIRECT, ALPHA=@ALPHA@
+ @DT@, @TEND@
+*CLOAD
+ Nsurface, 1, 0.0
+ Nsurface, 2, 0.0
+ Nsurface, 3, 0.0
+*NODE PRINT, NSET=NP0, FREQUENCY=1
+ U
+*NODE PRINT, NSET=NP90
+ U
+*END STEP

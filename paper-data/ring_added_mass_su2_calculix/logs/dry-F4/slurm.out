@@ -1,0 +1,5 @@
+Job 909 (ring-dry4)  host lugh  CPUs 1  tasks 1  mem 4096 MB  GPU none  start 2026-11-17T12:18:15+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/ring-su2-calculix/cases/dry-F4-spp100  stage dry  coupled: SU2 ranks 0 + CalculiX 1
+ringAddedMass dry (rho_f -), mesh factor 4: F 4: fluid 48x192 = 9216 quads, 9408 nodes; solid 16x192 = 3072 C3D8I; 192 interface points; V0 0.0015; potential A -2.256876e-04 B -1.142543e-03; omega_exact 2.555042196 rad/s, T 2.459131719 s, 100 steps/period, dt 2.459131719e-02 s, 400 steps, t_end 9.836526876 s; HHT alpha -0.05
+dry exit 0, 400 probe outputs
+Exit 0  end 2026-11-17T12:20:22+00:00  wall 127 s

@@ -1,0 +1,181 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+Parsing config file for zone 0
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+----------------- Physical Case Definition ( Zone 0 ) -------------------
+Incompressible Euler equations.
+Reading and writing ASCII SU2 native restart files.
+Read flow solution from: restart_flow.dat.
+Dimensional simulation.
+The reference area is 1 m^2.
+The semi-span will be computed using the max y(3D) value.
+The reference length is 1 m.
+Reference origin for moment evaluation is (0, 0, 0).
+Surface(s) where the force coefficients are evaluated: interface.
+
+Surface(s) plotted in the output file: interface.
+Input mesh file name: fluid.su2
+
+--------------- Space Numerical Integration ( Zone 0 ) ------------------
+Flux difference splitting (FDS) upwind scheme for the flow inviscid terms.
+Second order integration in space, with slope limiter.
+No slope-limiting method. 
+Gradient for upwind reconstruction: inverse-distance weighted Least-Squares.
+Gradient for viscous and source terms: inverse-distance weighted Least-Squares.
+
+--------------- Time Numerical Integration  ( Zone 0 ) ------------------
+Unsteady simulation, dual time stepping strategy (second order in time).
+Unsteady time step provided by the user (s): 0.0817426.
+Euler implicit method for the flow equations.
+FGMRES is used for solving the linear system.
+Using a ILU(0) preconditioning.
+Convergence criteria of the linear solver: 1e-08.
+Max number of linear iterations: 50.
+No CFL adaptation.
+Courant-Friedrichs-Lewy number:    1e+03
+
+------------------ Convergence Criteria  ( Zone 0 ) ---------------------
+Maximum number of solver subiterations: 300.
+Maximum number of physical time-steps: 99999999.
+Begin convergence monitoring at iteration 0.
+Residual minimum value: 1e-14.
+Cauchy series min. value: 1e-10.
+Number of Cauchy elements: 100.
+Begin windowed time average at iteration 2.
+
+-------------------- Output Information ( Zone 0 ) ----------------------
+File writing frequency: 
++------------------------------------+
+|                     File| Frequency|
++------------------------------------+
+|                  RESTART|        25|
+|                 PARAVIEW|        25|
++------------------------------------+
+Writing the convergence history file every 0 inner iterations.
+Writing the convergence history file every 1 time iterations.
+Writing the screen convergence history every 1000 inner iterations.
+Writing the screen convergence history every 1 time iterations.
+The tabular file format is CSV (.csv).
+Convergence history file name: history.
+Forces breakdown file name: forces_breakdown.dat.
+Surface file name: surface_flow.
+Volume file name: flow.
+Restart file name: restart_flow.dat.
+
+------------- Config File Boundary Information ( Zone 0 ) ---------------
++-----------------------------------------------------------------------+
+|                        Marker Type|                        Marker Name|
++-----------------------------------------------------------------------+
+|                         Euler wall|                          interface|
+|                                   |                               wall|
++-----------------------------------------------------------------------+
+|           Deformable mesh boundary|                          interface|
++-----------------------------------------------------------------------+
+
+-------------------- Output Preprocessing ( Zone 0 ) --------------------
+
+WARNING: SURFACE_PRESSURE_DROP can only be computed for at least 2 surfaces (outlet, inlet, ...)
+
+Screen output fields: TIME_ITER, CUR_TIME, INNER_ITER, RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y, DRAG, LIFT
+History output group(s): TIME_ITER, CUR_TIME, INNER_ITER, RMS_RES, AERO_COEFF
+Convergence field(s): RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y
+Warning: No (valid) fields chosen for time convergence monitoring. Time convergence monitoring inactive.
+Volume output fields: COORDINATES, SOLUTION, PRIMITIVE, GRID_VELOCITY
+
+------------------- Geometry Preprocessing ( Zone 0 ) -------------------
+Two dimensional problem.
+624 grid points before partitioning.
+576 volume elements before partitioning.
+2 surface markers.
+48 boundary elements in index 0 (Marker = interface).
+48 boundary elements in index 1 (Marker = wall).
+Executing the partitioning functions.
+Building the graph adjacency structure.
+Calling ParMETIS... graph partitioning complete (26 edge cuts).
+Distributing ParMETIS coloring.
+Rebalancing vertices.
+Rebalancing volume element connectivity.
+Rebalancing markers and surface elements.
+676 vertices including ghost points. 
+600 interior elements including halo cells. 
+600 quadrilaterals.
+Establishing MPI communication patterns.
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+[... 15803 lines omitted; full log not published ...]
++-------------------------------------------------------------------------------------------------------+
+|         131|  1.0627e+01|           0|    2.443604|    3.421854|    2.856931|-40796.971314|39638.734376|
+|         131|  1.0627e+01|         299|    2.305653|    6.175497|    6.151262|-910586.566406|908670.825684|
+---[precice]  Mapping "Force" for t=10.626544169314897 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=10.626544169314897 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 10 (min: 1, max: 50), time-window 130 (max: 400), t 10.544801521858629, Dt 0.08174264745626844, max-dt 0.08174264745626844
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         131|  1.0627e+01|           0|    2.443359|    3.466579|    2.857846|-41542.054588|32868.158413|
+|         131|  1.0627e+01|         299|    2.311221|    6.230433|    6.206636|-752962.464844|1027604.064453|
+---[precice]  Mapping "Force" for t=10.626544169314897 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=10.626544169314897 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 11 (min: 1, max: 50), time-window 130 (max: 400), t 10.544801521858629, Dt 0.08174264745626844, max-dt 0.08174264745626844
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         131|  1.0627e+01|           0|    2.266300|    3.378640|    2.828061|-27658.802573| 1939.355425|
+|         131|  1.0627e+01|         299|    2.167873|    6.253631|    6.242094|-8178751.587891|14954341.863647|
+---[precice]  Mapping "Force" for t=10.626544169314897 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=10.626544169314897 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 12 (min: 1, max: 50), time-window 130 (max: 400), t 10.544801521858629, Dt 0.08174264745626844, max-dt 0.08174264745626844
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         131|  1.0627e+01|           0|    2.425053|    3.408984|    3.018479|-43853.026765|57372.075981|
+|         131|  1.0627e+01|         299|    2.301482|    6.172844|    6.156609|-714021.513672|1534276.477539|
+---[precice]  Mapping "Force" for t=10.626544169314897 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=10.626544169314897 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 13 (min: 1, max: 50), time-window 130 (max: 400), t 10.544801521858629, Dt 0.08174264745626844, max-dt 0.08174264745626844
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         131|  1.0627e+01|           0|    2.425926|    3.406795|    3.015750|-45328.536187|56616.445104|
+|         131|  1.0627e+01|         299|    2.301697|    6.169913|    6.153515|-724974.001953|1453695.928223|
+---[precice]  Mapping "Force" for t=10.626544169314897 from "Fluid-Mesh" to "Solid-Mesh"
+---[precice]  Mapping "Displacement" for t=10.626544169314897 from "Solid-Mesh" to "Fluid-Mesh"
+---[precice]  it 14 (min: 1, max: 50), time-window 130 (max: 400), t 10.544801521858629, Dt 0.08174264745626844, max-dt 0.08174264745626844
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|         131|  1.0627e+01|           0|    9.303437|   13.641844|   13.557101|-17069477.329926|-491054670.771202|
+
+
+Error in "void CSolver::SetResidual_RMS(const CGeometry*, const CConfig*)": 
+-------------------------------------------------------------------------
+SU2 has diverged (Residual > 10^20 detected).
+------------------------------ Error Exit -------------------------------
+
+
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 1 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+[lugh:2279929] 1 more process has sent help message help-mpi-api.txt / mpi-abort
+[lugh:2279929] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages

@@ -1,0 +1,3 @@
+level,F,omega_err_pct_spp25,omega_err_pct_spp50,omega_err_pct_spp100,observed_time_order,omega_time_richardson_err_pct,ratio_err_pct_spp25,ratio_err_pct_spp50,ratio_err_pct_spp100,loss_per_period_pct_spp25,loss_per_period_pct_spp50,loss_per_period_pct_spp100
+dry,2,-0.4694269,-0.0255156,0.08693262,1.981011,0.1244154,,,,,,
+moderate,2,-0.9745181,-0.01483464,0.2367897,1.931287,0.3206645,-0.5074734,0.01068368,0.149727,1.390243,0.361575,0.2401364

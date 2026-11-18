@@ -1,0 +1,30 @@
+check,value,limit,passed,applies,note
+"ratio error, finest mesh (F4), weak",0.01036644,0.1,yes,yes,
+"ratio error decreases under refinement, weak",,,yes,yes,
+"observed mesh order of the ratio, weak",1.924282,1.5,yes,yes,solids4foam: standard-solid criterion
+"ratio error against thin-ring theory, finest mesh (F4), weak",0.02323736,0.25,yes,yes,
+"ratio error, finest mesh (F4), moderate",0.04223388,0.1,yes,yes,
+"ratio error decreases under refinement, moderate",,,yes,yes,
+"observed mesh order of the ratio, moderate",1.922425,1.5,yes,yes,solids4foam: standard-solid criterion
+"ratio error against thin-ring theory, finest mesh (F4), moderate",0.1102662,0.25,yes,yes,
+"ratio error, finest mesh (F4), strong",0.05169492,0.1,yes,yes,
+"ratio error decreases under refinement, strong",,,yes,yes,
+"observed mesh order of the ratio, strong",1.914953,1.5,yes,yes,solids4foam: standard-solid criterion
+"ratio error against thin-ring theory, finest mesh (F4), strong",0.1703845,0.25,yes,yes,
+"frequency error, finest mesh (F4), 100 steps/period, dry",-0.05927778,0.3,yes,yes,
+"frequency error, finest mesh (F4), 100 steps/period, weak",-0.04891748,0.3,yes,yes,
+"frequency error, finest mesh (F4), 100 steps/period, moderate",-0.01706893,0.3,yes,yes,
+"frequency error, finest mesh (F4), 100 steps/period, strong",-0.0076135,0.3,yes,yes,
+"amplitude loss per period, F2, 100 steps/period, weak",0.04733324,2,yes,yes,
+"amplitude loss per period, F2, 100 steps/period, moderate",0.2401364,2,yes,yes,
+"amplitude loss per period, F2, 100 steps/period, strong",0.5200785,2,yes,yes,
+"largest amplitude growth per period, any run",-0.000520461,0.2,yes,yes,
+"observed time order of the frequency, F2, dry",1.981011,1.5,yes,yes,
+"time-extrapolated frequency error, F2, dry",0.1244154,0.1,no,yes,not met because the C3D8I solid is not converged in space; the extrapolated value contains the F2 spatial error
+"observed time order of the frequency, F2, moderate",1.931287,1.5,yes,yes,
+"time-extrapolated frequency error, F2, moderate",0.3206645,0.1,no,yes,not met because the C3D8I solid is not converged in space; the extrapolated value contains the F2 spatial error
+"frequency change between meshes, F2 to F4, dry",-0.1460834,0.1,no,yes,not met because the C3D8I solid is not converged in space
+"frequency change between meshes, F2 to F4, weak",-0.1656111,0.1,no,yes,not met because the C3D8I solid is not converged in space
+"frequency change between meshes, F2 to F4, moderate",-0.253259,0.1,no,yes,not met because the C3D8I solid is not converged in space
+"frequency change between meshes, F2 to F4, strong",-0.3410597,0.1,no,yes,not met because the C3D8I solid is not converged in space
+Robin-Neumann and IQN-ILS frequencies agree,,0.1,,no,only IQN-ILS was run

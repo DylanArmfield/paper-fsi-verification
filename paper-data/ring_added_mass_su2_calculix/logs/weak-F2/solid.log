@@ -1,0 +1,181 @@
+
+************************************************************
+
+CalculiX Version 2.20, Copyright(C) 1998-2022 Guido Dhondt
+CalculiX comes with ABSOLUTELY NO WARRANTY. This is free
+software, and you are welcome to redistribute it under
+certain conditions, see gpl.htm
+
+************************************************************
+
+You are using an executable made on Sun Jul 31 18:08:37 CEST 2022
+ Decascading the MPC's
+
+ Determining the structure of the matrix:
+ Using up to 1 cpu(s) for setting up the structure of the matrix.
+ number of equations
+ 10368
+ number of nonzero lower triangular matrix elements
+ 194112
+
+Starting FSI analysis via preCICE using the geometrically linear CalculiX solver...
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+Setting up preCICE participant Solid, using config file: config.yml
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+---[precice]  This is preCICE version 3.5.0
+---[precice]  Revision info: no-info [git failed to run]
+---[precice]  Build type: Release (without debug log)
+---[precice]  Working directory "/scratch/users/dylan/FSI_benchmarks/runs/ring-su2-calculix/cases/weak-F2-b1e6/solid-calculix"
+---[precice]  Configuring preCICE with configuration "../precice-config.xml"
+---[precice]  I am participant "Solid"
+Using quasi 2D-3D coupling
+Set ID Found 
+2D-3D mapping results in a 2D mesh of size 96 from the 192 points in 3D space.
+Read data 'Force' found.
+Write data 'Displacement' found.
+---[precice]  Setting up primary communication to coupling partner/s
+---[precice]  Primary ranks are connected
+---[precice]  Setting up preliminary secondary communication to coupling partner/s
+---[precice]  Prepare partition for mesh Solid-Mesh
+---[precice]  Gather mesh Solid-Mesh
+---[precice]  Send global mesh Solid-Mesh
+---[precice]  Setting up secondary communication to coupling partner/s
+---[precice]  Secondary ranks are connected
+---[precice]  it 1 (min: 1, max: 50), time-window 1 (max: 400), t 0, Dt 0.02579712152729444, max-dt 0.02579712152729444
+Initializing coupling data
+Adapter reading coupling data...
+Reading FORCES coupling data.
+Adjusting time step for transient step
+precice_dt = 0.025797, ccx_dt = 0.025797 (dtheta = 0.002500, tper = 10.318849) -> dt = 0.025797 (dtheta = 0.002500)
+Adapter reading coupling data...
+Reading FORCES coupling data.
+Adapter writing checkpoint...
+ increment 1 attempt 1 
+ increment size= 2.579712e-02
+ sum of previous increments=0.000000e+00
+ actual step time=2.579712e-02
+ actual total time=2.579712e-02
+
+ iteration 1
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ average force= 0.002291
+ time avg. forc= 0.002291
+ largest residual force= 0.000000 in node 3808 and dof 2
+ largest increment of disp= 3.869568e-05
+ largest correction to disp= 1.763713e-07 in node 73 and dof 2
+
+ no convergence
+
+ iteration 2
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ average force= 0.002291
+ time avg. forc= 0.002291
+ largest residual force= 0.000000 in node 3535 and dof 2
+ largest increment of disp= 3.869568e-05
+ largest correction to disp= 3.222978e-20 in node 168 and dof 2
+
+ convergence
+
+Adapter writing coupling data...
+[... 180182 lines omitted; full log not published ...]
+ energy increase = -3.355891e-06
+
+ energy balance (absolute) = -2.150287e-06 
+ energy balance (relative) = 0.568664 % 
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+---[precice]  Close communication channels
+________________________________________
+
+Total CalculiX Time: 1546.190027
+________________________________________
+
+  The numbers below are estimated upper bounds
+
+  number of:
+
+   nodes:         4032
+   elements:          768
+   one-dimensional elements:            0
+   two-dimensional elements:            0
+   integration points per element:           27
+   degrees of freedom per node:            3
+   layers per element:            1
+
+   distributed facial loads:            0
+   distributed volumetric loads:            0
+   concentrated loads:          576
+   single point constraints:         1728
+   multiple point constraints:            1
+   terms in all multiple point constraints:            1
+   tie constraints:            0
+   dependent nodes tied by cyclic constraints:            0
+   dependent nodes in pre-tension constraints:            0
+
+   sets:            5
+   terms in all sets:         4420
+
+   materials:            1
+   constants per material and temperature:            2
+   temperature points per material:            1
+   plastic data points per material:            0
+
+   orientations:            0
+   amplitudes:            2
+   data points in all amplitudes:            2
+   print requests:            2
+   transformations:            0
+   property cards:            0
+
+
+ STEP            1
+
+ Dynamic analysis was selected
+
+ Newton-Raphson iterative procedure is active
+
+
+ Job finished
+
