@@ -1,0 +1,6 @@
+Job 912 (ring-weak-F1-b1e6)  host lugh  CPUs 1  tasks 3  mem 8192 MB  GPU none  start 2026-11-17T12:28:50+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/ring-su2-calculix/cases/weak-F1-b1e6  stage coupled  coupled: SU2 ranks 2 + CalculiX 1
+ringAddedMass weak (rho_f 14.0), mesh factor 1: F 1: fluid 12x48 = 576 quads, 624 nodes; solid 4x48 = 192 C3D8I; 48 interface points; V0 0.0015; potential A -2.256876e-04 B -1.142543e-03; omega_exact 2.435614881 rad/s, T 2.579712153 s, 100 steps/period, dt 2.579712153e-02 s, 400 steps, t_end 10.318848611 s; HHT alpha -0.05; coupling rel tol 1e-06; SU2 inner cap 300, minval -14.0, BETA_FACTOR 1000000.0
+windows 400  mean coupling its 6.91  max 11  at-cap 0
+stage 2 exit 0 (solid 0, fluid 0), wall 541 s
+Exit 0  end 2026-11-17T12:37:51+00:00  wall 541 s

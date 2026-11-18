@@ -1,0 +1,261 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+--------------------------------------------------------------------------
+The OSC pt2pt component does not support MPI_THREAD_MULTIPLE in this release.
+Workarounds are to run on a single node, or to use a system with an RDMA
+capable network such as Infiniband.
+--------------------------------------------------------------------------
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+Parsing config file for zone 0
+WARNING: Setting WINDOW_START_ITER = RESTART_ITER for meaningful running average.
+
+----------------- Physical Case Definition ( Zone 0 ) -------------------
+Incompressible Euler equations.
+Reading and writing ASCII SU2 native restart files.
+Read flow solution from: restart_flow.dat.
+Dimensional simulation.
+The reference area is 1 m^2.
+The semi-span will be computed using the max y(3D) value.
+The reference length is 1 m.
+Reference origin for moment evaluation is (0, 0, 0).
+Surface(s) where the force coefficients are evaluated: interface.
+
+Surface(s) plotted in the output file: interface.
+Input mesh file name: fluid.su2
+
+--------------- Space Numerical Integration ( Zone 0 ) ------------------
+Flux difference splitting (FDS) upwind scheme for the flow inviscid terms.
+Second order integration in space, with slope limiter.
+No slope-limiting method. 
+Gradient for upwind reconstruction: inverse-distance weighted Least-Squares.
+Gradient for viscous and source terms: inverse-distance weighted Least-Squares.
+
+--------------- Time Numerical Integration  ( Zone 0 ) ------------------
+Unsteady simulation, dual time stepping strategy (second order in time).
+Unsteady time step provided by the user (s): 0.0348193.
+Euler implicit method for the flow equations.
+FGMRES is used for solving the linear system.
+Using a ILU(0) preconditioning.
+Convergence criteria of the linear solver: 1e-08.
+Max number of linear iterations: 50.
+No CFL adaptation.
+Courant-Friedrichs-Lewy number:    1e+03
+
+------------------ Convergence Criteria  ( Zone 0 ) ---------------------
+Maximum number of solver subiterations: 50.
+Maximum number of physical time-steps: 3.
+Begin convergence monitoring at iteration 0.
+Residual minimum value: 1e-16.
+Cauchy series min. value: 1e-10.
+Number of Cauchy elements: 100.
+Begin windowed time average at iteration 2.
+
+-------------------- Output Information ( Zone 0 ) ----------------------
+File writing frequency: 
++------------------------------------+
+|                     File| Frequency|
++------------------------------------+
+|                  RESTART|        25|
+|                 PARAVIEW|        25|
++------------------------------------+
+Writing the convergence history file every 0 inner iterations.
+Writing the convergence history file every 1 time iterations.
+Writing the screen convergence history every 1 inner iterations.
+Writing the screen convergence history every 1 time iterations.
+The tabular file format is CSV (.csv).
+Convergence history file name: history.
+Forces breakdown file name: forces_breakdown.dat.
+Surface file name: surface_flow.
+Volume file name: flow.
+Restart file name: restart_flow.dat.
+
+------------- Config File Boundary Information ( Zone 0 ) ---------------
++-----------------------------------------------------------------------+
+|                        Marker Type|                        Marker Name|
++-----------------------------------------------------------------------+
+|                         Euler wall|                          interface|
+|                                   |                               wall|
++-----------------------------------------------------------------------+
+|           Deformable mesh boundary|                          interface|
++-----------------------------------------------------------------------+
+
+-------------------- Output Preprocessing ( Zone 0 ) --------------------
+
+WARNING: SURFACE_PRESSURE_DROP can only be computed for at least 2 surfaces (outlet, inlet, ...)
+
+Screen output fields: TIME_ITER, CUR_TIME, INNER_ITER, RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y, DRAG, LIFT
+History output group(s): TIME_ITER, CUR_TIME, INNER_ITER, RMS_RES, AERO_COEFF
+Convergence field(s): RMS_PRESSURE, RMS_VELOCITY-X, RMS_VELOCITY-Y
+Warning: No (valid) fields chosen for time convergence monitoring. Time convergence monitoring inactive.
+Volume output fields: COORDINATES, SOLUTION, PRIMITIVE, GRID_VELOCITY
+
+------------------- Geometry Preprocessing ( Zone 0 ) -------------------
+Two dimensional problem.
+624 grid points.
+576 volume elements.
+2 surface markers.
+48 boundary elements in index 0 (Marker = interface).
+48 boundary elements in index 1 (Marker = wall).
+576 quadrilaterals.
+Setting point connectivity.
+Renumbering points (Reverse Cuthill McKee Ordering).
+Recomputing point connectivity.
+Setting element connectivity.
+Checking the numerical grid orientation.
+All volume elements are correctly orientend.
+There has been a re-orientation of 48 LINE surface elements.
+Identifying edges and vertices.
+Setting the control volume structure.
+Area of the computational grid: 3.59469.
+Searching for the closest normal neighbors to the surfaces.
+Storing a mapping from global to local point index.
+Compute the surface curvature.
+Max K: 0.952381. Mean K: 0.809524. Standard deviation K: 0.142857.
+Checking for periodicity.
+Computing mesh quality statistics for the dual control volumes.
++--------------------------------------------------------------+
+|           Mesh Quality Metric|        Minimum|        Maximum|
++--------------------------------------------------------------+
+|    Orthogonality Angle (deg.)|             90|             90|
+|     CV Face Area Aspect Ratio|        3.85878|        10.4645|
+|           CV Sub-Volume Ratio|        1.01266|        1.03509|
++--------------------------------------------------------------+
+Finding max control volume width.
+Wetted area = 6.57852 m.
+Area projection in the x-plane = 2.09102 m, y-plane = 2.09102 m.
+Max. coordinate in the x-direction = 1.05 m, y-direction = 1.05 m.
+Min. coordinate in the x-direction = -1.05 m, y-direction = -1.05 m.
+Checking if Euler & Symmetry markers are straight/plane:
+Boundary marker interface is NOT a single straight.
+Boundary marker wall is NOT a single straight.
+Computing wall distances.
+
+-------------------- Solver Preprocessing ( Zone 0 ) --------------------
+ Warning: There is no restart file (flow_00000.meta).
+ Computation will continue without updating metadata parameters.
+Incompressible flow: rho_ref, vel_ref, temp_ref, p_ref
+are set to 1.0 in order to perform a dimensional calculation.
+Force coefficients computed using MACH_MOTION.
+The reference area for force coeffs. is 1 m^2.
+The reference length for force coeffs. is 1 m.
+The pressure is decomposed into thermodynamic and dynamic components.
+The initial value of the dynamic pressure is 0.
+Mach number: 4.70989e-05, computed using the Bulk modulus.
+For external flows, the initial state is imposed at the far-field.
+Angle of attack (deg): 0, computed using the initial velocity.
+Side slip angle (deg): 0, computed using the initial velocity.
+SI units only. The grid should be dimensional (meters).
+No energy equation.
+
+-- Models:
++------------------------------------------------------------------------------+
+|          Viscosity Model|        Conductivity Model|              Fluid Model|
++------------------------------------------------------------------------------+
+|                        -|                         -|         CONSTANT_DENSITY|
++------------------------------------------------------------------------------+
+-- Fluid properties:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|          Bulk Modulus|        142000|             1|        Pa|        142000|
++------------------------------------------------------------------------------+
+-- Initial and free-stream conditions:
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|      Dynamic Pressure|             0|             1|        Pa|             0|
+|        Total Pressure|     0.0001575|             1|        Pa|     0.0001575|
+|               Density|           140|             1|    kg/m^3|           140|
+|            Velocity-X|        0.0015|             1|       m/s|        0.0015|
+|            Velocity-Y|             0|             1|       m/s|             0|
+|    Velocity Magnitude|        0.0015|             1|       m/s|        0.0015|
++------------------------------------------------------------------------------+
+|           Mach Number|             -|             -|         -|   4.70989e-05|
++------------------------------------------------------------------------------+
+-- Unsteady conditions
++------------------------------------------------------------------------------+
+|                  Name|    Dim. value|    Ref. value|      Unit|Non-dim. value|
++------------------------------------------------------------------------------+
+|            Total Time|         1e+06|             1|         s|         1e+06|
+|             Time Step|     0.0348193|             1|         s|     0.0348193|
++------------------------------------------------------------------------------+
+Initialize Jacobian structure (Euler). MG level: 0.
+Initialize Jacobian structure (Mesh Deformation).
+
+WARNING: The restart file does not contain grid velocities, these will be set to zero.
+
+
+------------------- Numerics Preprocessing ( Zone 0 ) -------------------
+
+----------------- Integration Preprocessing ( Zone 0 ) ------------------
+
+------------------- Iteration Preprocessing ( Zone 0 ) ------------------
+Euler/Navier-Stokes/RANS fluid iteration.
+
+WARNING: The restart file does not contain grid velocities, these will be set to zero.
+
++-------------------------------------------------------------------------------------------------------+
+|   Time_Iter|    Cur_Time|  Inner_Iter|      rms[P]|      rms[U]|      rms[V]|          CD|          CL|
++-------------------------------------------------------------------------------------------------------+
+|           2|  3.4819e-02|           0|   -2.552185|   -4.882108|   -5.067329|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           1|   -2.561261|   -4.996601|   -5.135433|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           2|   -2.566930|   -4.996543|   -5.140404|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           3|   -2.571220|   -4.996807|   -5.142529|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           4|   -2.574720|   -4.997188|   -5.143745|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           5|   -2.577704|   -4.997620|   -5.144568|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           6|   -2.580326|   -4.998083|   -5.145200|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           7|   -2.582680|   -4.998566|   -5.145734|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           8|   -2.584828|   -4.999064|   -5.146218|   -0.000000|    0.000000|
+|           2|  3.4819e-02|           9|   -2.586813|   -4.999576|   -5.146678|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          10|   -2.588667|   -5.000101|   -5.147131|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          11|   -2.590414|   -5.000636|   -5.147585|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          12|   -2.592071|   -5.001182|   -5.148047|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          13|   -2.593654|   -5.001738|   -5.148521|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          14|   -2.595172|   -5.002303|   -5.149008|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          15|   -2.596635|   -5.002879|   -5.149511|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          16|   -2.598051|   -5.003464|   -5.150030|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          17|   -2.599427|   -5.004058|   -5.150565|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          18|   -2.600766|   -5.004661|   -5.151118|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          19|   -2.602075|   -5.005273|   -5.151687|   -0.000000|    0.000000|
+|           2|  3.4819e-02|          20|   -2.603356|   -5.005894|   -5.152274|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          21|   -2.604612|   -5.006524|   -5.152877|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          22|   -2.605847|   -5.007162|   -5.153496|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          23|   -2.607063|   -5.007809|   -5.154132|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          24|   -2.608262|   -5.008464|   -5.154784|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          25|   -2.609447|   -5.009127|   -5.155451|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          26|   -2.610617|   -5.009799|   -5.156133|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          27|   -2.611776|   -5.010479|   -5.156830|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          28|   -2.612924|   -5.011166|   -5.157542|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          29|   -2.614063|   -5.011862|   -5.158267|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          30|   -2.615193|   -5.012565|   -5.159006|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          31|   -2.616315|   -5.013276|   -5.159759|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          32|   -2.617430|   -5.013994|   -5.160525|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          33|   -2.618540|   -5.014720|   -5.161303|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          34|   -2.619644|   -5.015453|   -5.162094|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          35|   -2.620743|   -5.016193|   -5.162897|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          36|   -2.621838|   -5.016941|   -5.163712|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          37|   -2.622929|   -5.017696|   -5.164538|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          38|   -2.624017|   -5.018457|   -5.165376|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          39|   -2.625102|   -5.019226|   -5.166224|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          40|   -2.626185|   -5.020001|   -5.167084|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          41|   -2.627265|   -5.020783|   -5.167953|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          42|   -2.628344|   -5.021572|   -5.168833|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          43|   -2.629421|   -5.022367|   -5.169723|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          44|   -2.630497|   -5.023169|   -5.170623|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          45|   -2.631573|   -5.023977|   -5.171533|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          46|   -2.632647|   -5.024792|   -5.172451|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          47|   -2.633721|   -5.025612|   -5.173379|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          48|   -2.634795|   -5.026439|   -5.174316|   -0.000001|    0.000000|
+|           2|  3.4819e-02|          49|   -2.635868|   -5.027272|   -5.175261|   -0.000001|    0.000000|
+
+----------------------------- Solver Exit -------------------------------
+Maximum number of time iterations reached (TIME_ITER = 3).
+-------------------------------------------------------------------------
+MODAL F2 -1.2289517986e-01  F0(uniform) -1.5452392216e-02

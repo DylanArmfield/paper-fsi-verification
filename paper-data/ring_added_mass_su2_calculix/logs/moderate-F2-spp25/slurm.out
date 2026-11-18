@@ -1,0 +1,6 @@
+Job 919 (ring-mod-F2-b1e6-spp25)  host lugh  CPUs 1  tasks 5  mem 8192 MB  GPU none  start 2026-11-17T14:33:59+00:00
+case /scratch/users/dylan/FSI_benchmarks/runs/ring-su2-calculix/cases/mod-F2-b1e6-spp25  stage coupled  coupled: SU2 ranks 4 + CalculiX 1
+ringAddedMass moderate (rho_f 140.0), mesh factor 2: F 2: fluid 24x96 = 2304 quads, 2400 nodes; solid 8x96 = 768 C3D8I; 96 interface points; V0 0.0015; potential A -2.256876e-04 B -1.142543e-03; omega_exact 1.804513172 rad/s, T 3.481928203 s, 25 steps/period, dt 1.392771281e-01 s, 100 steps, t_end 13.927712811 s; HHT alpha -0.05; coupling rel tol 1e-06; SU2 inner cap 300, minval -14.0, BETA_FACTOR 1000000.0
+windows 100  mean coupling its 11.74  max 20  at-cap 0
+stage 2 exit 0 (solid 0, fluid 0), wall 582 s
+Exit 0  end 2026-11-17T14:43:41+00:00  wall 582 s

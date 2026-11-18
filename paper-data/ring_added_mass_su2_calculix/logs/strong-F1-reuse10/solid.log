@@ -1,0 +1,181 @@
+
+************************************************************
+
+CalculiX Version 2.20, Copyright(C) 1998-2022 Guido Dhondt
+CalculiX comes with ABSOLUTELY NO WARRANTY. This is free
+software, and you are welcome to redistribute it under
+certain conditions, see gpl.htm
+
+************************************************************
+
+You are using an executable made on Sun Jul 31 18:08:37 CEST 2022
+ Decascading the MPC's
+
+ Determining the structure of the matrix:
+ Using up to 1 cpu(s) for setting up the structure of the matrix.
+ number of equations
+ 2688
+ number of nonzero lower triangular matrix elements
+ 49056
+
+Starting FSI analysis via preCICE using the geometrically linear CalculiX solver...
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+Setting up preCICE participant Solid, using config file: config.yml
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+---[precice]  This is preCICE version 3.5.0
+---[precice]  Revision info: no-info [git failed to run]
+---[precice]  Build type: Release (without debug log)
+---[precice]  Working directory "/scratch/users/dylan/FSI_benchmarks/runs/ring-su2-calculix/cases/str-F1-b1e6/solid-calculix"
+---[precice]  Configuring preCICE with configuration "../precice-config.xml"
+---[precice]  I am participant "Solid"
+Using quasi 2D-3D coupling
+Set ID Found 
+2D-3D mapping results in a 2D mesh of size 48 from the 96 points in 3D space.
+Read data 'Force' found.
+Write data 'Displacement' found.
+---[precice]  Setting up primary communication to coupling partner/s
+---[precice]  Primary ranks are connected
+---[precice]  Setting up preliminary secondary communication to coupling partner/s
+---[precice]  Prepare partition for mesh Solid-Mesh
+---[precice]  Gather mesh Solid-Mesh
+---[precice]  Send global mesh Solid-Mesh
+---[precice]  Setting up secondary communication to coupling partner/s
+---[precice]  Secondary ranks are connected
+---[precice]  it 1 (min: 1, max: 50), time-window 1 (max: 400), t 0, Dt 0.08174264745626844, max-dt 0.08174264745626844
+Initializing coupling data
+Adapter reading coupling data...
+Reading FORCES coupling data.
+Adjusting time step for transient step
+precice_dt = 0.081743, ccx_dt = 0.081743 (dtheta = 0.002500, tper = 32.697059) -> dt = 0.081743 (dtheta = 0.002500)
+Adapter reading coupling data...
+Reading FORCES coupling data.
+Adapter writing checkpoint...
+ increment 1 attempt 1 
+ increment size= 8.174265e-02
+ sum of previous increments=0.000000e+00
+ actual step time=8.174265e-02
+ actual total time=8.174265e-02
+
+ iteration 1
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ average force= 0.014358
+ time avg. forc= 0.014358
+ largest residual force= 0.000000 in node 919 and dof 1
+ largest increment of disp= 1.226140e-04
+ largest correction to disp= 2.118943e-06 in node 25 and dof 1
+
+ no convergence
+
+ iteration 2
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ average force= 0.014358
+ time avg. forc= 0.014358
+ largest residual force= 0.000000 in node 625 and dof 1
+ largest increment of disp= 1.226140e-04
+ largest correction to disp= 1.062869e-18 in node 255 and dof 2
+
+ convergence
+
+Adapter writing coupling data...
+[... 116735 lines omitted; full log not published ...]
+ iteration 1
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ average force= 4795643.021048
+ time avg. forc= 36889.702749
+ largest residual force= 0.000005 in node 361 and dof 1
+ largest increment of disp= 2.002949e+03
+ largest correction to disp= 2.002949e+03 in node 25 and dof 1
+
+ no convergence
+
+ iteration 2
+
+ Using up to 1 cpu(s) for the symmetric stiffness/mass contributions.
+
+ Factoring the system of equations using the symmetric spooles solver
+ Using up to 1 cpu(s) for spooles.
+
+ Using up to 1 cpu(s) for the stress calculation.
+
+ Using up to 1 cpu(s) for the energy calculation.
+
+ average force= 4795643.021048
+ time avg. forc= 36889.702749
+ largest residual force= 0.000002 in node 760 and dof 1
+ largest increment of disp= 2.002949e+03
+ largest correction to disp= 7.502777e-10 in node 362 and dof 1
+
+ convergence
+
+Adapter writing coupling data...
+Writing DISPLACEMENTS coupling data.
+Adapter calling advance()...
+---[precice] ERROR:  Receiving data from another participant (using sockets) failed with a system error: read: End of file [asio.misc:2]. This often means that the other participant exited with an error (look there).
+[lugh:2279928] *** Process received signal ***
+[lugh:2279928] Signal: Aborted (6)
+[lugh:2279928] Signal code:  (-6)
+[lugh:2279928] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x787ce8045330]
+[lugh:2279928] [ 1] /lib/x86_64-linux-gnu/libc.so.6(pthread_kill+0x11c)[0x787ce809ebec]
+[lugh:2279928] [ 2] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x1e)[0x787ce804527e]
+[lugh:2279928] [ 3] /lib/x86_64-linux-gnu/libc.so.6(abort+0xdf)[0x787ce80288ff]
+[lugh:2279928] [ 4] /lib/x86_64-linux-gnu/libprecice.so.3(+0x81748)[0x787ce9081748]
+[lugh:2279928] [ 5] ccx_preCICE(+0x1f95cd)[0x6433c160d5cd]
+[lugh:2279928] [ 6] ccx_preCICE(+0xbad6)[0x6433c141fad6]
+[lugh:2279928] [ 7] /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x787ce802a1ca]
+[lugh:2279928] [ 8] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x787ce802a28b]
+[lugh:2279928] [ 9] ccx_preCICE(+0x16815)[0x6433c142a815]
+[lugh:2279928] *** End of error message ***

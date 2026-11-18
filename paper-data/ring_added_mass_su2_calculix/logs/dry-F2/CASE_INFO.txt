@@ -1,0 +1,1 @@
+ringAddedMass dry (rho_f -), mesh factor 2: F 2: fluid 24x96 = 2304 quads, 2400 nodes; solid 8x96 = 768 C3D8I; 96 interface points; V0 0.0015; potential A -2.256876e-04 B -1.142543e-03; omega_exact 2.555042196 rad/s, T 2.459131719 s, 100 steps/period, dt 2.459131719e-02 s, 400 steps, t_end 9.836526876 s; HHT alpha -0.05
