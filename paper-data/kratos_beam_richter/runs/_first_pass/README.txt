@@ -1,0 +1,1 @@
+First runs of the three level-0 cases (2026-11-10 22:46 UTC). They finished normally with exit 0 at their steady-state test (t = 17.15, 18.3, 18.8 s) before the smartsimet restart; they were moved here on 2026-11-11 by mistake as if the restart had stopped them. The reruns in runs/ repeat them to check reproducibility.
