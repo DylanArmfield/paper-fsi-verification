@@ -12,14 +12,14 @@ and the figures. No `.tex` file is changed. The discussion is in issue #36.
   Richardson value from levels 1–3 (`../beam_richter_findings.md`). With the printed 0.3 m/s peak it is
   0.74% above level 3 and 0.20% below the Richardson value. At both peaks Kratos level 1 lies between
   solids4foam's level 3 and its extrapolated value.
-- **Convergence from opposite sides.** Kratos u_x(A) falls by 1.1% (0.2) and 1.3% (0.3) from level 0
+- **From level 0 to level 1.** Kratos u_x(A) falls by 1.1% (0.2) and 1.3% (0.3) from level 0
   to level 1, while solids4foam rises by 19% and 18% over the same two levels.
 - **F_x.** Kratos gives two estimates, one from the interface reactions (Fc) and one from a direct
-  traction integral (Ff). At level 1 they bracket solids4foam's level 3 at both peaks and Richter's value
-  at 0.2 m/s, and their gap halves from level 0 to level 1.
+  traction integral (Ff). At level 1 the spread between them contains solids4foam's level 3 at both peaks
+  and Richter's value at 0.2 m/s, and it halves from level 0 to level 1.
 - **The two inflows.** The ratio of the 0.3 and 0.2 m/s results is 1.761 for u_x(A) and 1.80 (Fc) or
-  1.81 (Ff) for F_x, against 1.758 and 1.796 in solids4foam. An independent code thus reproduces
-  Richter's values only with the 0.2 m/s peak, which is the corrected inflow of `app:beam`.
+  1.81 (Ff) for F_x, against 1.758 and 1.796 in solids4foam. An independent code is thus consistent
+  with Richter's values only with the 0.2 m/s peak, which is the corrected inflow of `app:beam`.
 
 ## Code and platform
 
@@ -68,9 +68,10 @@ and the figures. No `.tex` file is changed. The discussion is in issue #36.
   [1/Δt, −1/Δt, 0] each step and replaces the mesh velocity helper by `TimeDiscretization.BDF1()`, as for
   the 3dTube runs (`../kratos_3dtube/`, PR #92). Δt = 0.05 s. A run stops once u_x(A) and Fc_x change by
   less than 1e-6 (relative) over 1 s, after at least 4 s, which happens at 17 to 19 s.
-- **Coupling.** Dirichlet–Neumann with MVQN. A step is converged when the RMS interface displacement
-  residual |r|/√n_DOF is below 1e-10 m (about 2e-6 of u_x(A)), with at most 50 iterations. Every step of
-  every run met it.
+- **Coupling.** Dirichlet–Neumann with MVQN (full Jacobian) at the Kratos 10.3.0 default settings. The
+  input sets only `solver_type`, which leaves `w_0 = 0.825` and `abs_cut_off_tol = 1e-8`. A step is
+  converged when the RMS interface displacement residual |r|/√n_DOF is below 1e-10 m (about 2e-6 of
+  u_x(A)), with at most 50 iterations. Every step of every run met it.
 - **Force on the half plate.** `Fr` is minus the sum of the fluid REACTION over the interface nodes,
   which is the load the coupling gives the plate. At the nodes of the plate base edge (y = 0) it also
   contains the share of the floor traction next to the edge, which goes into the clamp. `Fc`, the primary
@@ -116,14 +117,14 @@ half plate. Full tables, with u_y(A), u_z(A), F_y and F_z, are in `results/summa
 - **u_x(A).** Kratos level 1 is within 0.54% (0.2) and 0.74% (0.3) of solids4foam's level 3 and within
   0.44% of Richter. The solids4foam Richardson values are conditional (`app:beam`), but Kratos level 1 is
   within 0.4% of them at both peaks.
-- **Why the codes converge from opposite sides.** At 0.2 m/s, from level 0 to level 1 the plate alone becomes 4.9%
+- **Why the codes move in opposite directions.** At 0.2 m/s, from level 0 to level 1 the plate alone becomes 4.9%
   more compliant in Kratos and 9.0% in solids4foam, while the force on the plate falls by 5.3% in Kratos
   (Fc) and rises by 7.1% in solids4foam. The products, −0.6% and +16.8%, give the direction and most of
   the size of the u_x(A) changes (−1.1% and +18.7%). So the direction comes from the fluid force.
 - **F_x.** At level 1 Fc is 2.7% (0.2) and 2.9% (0.3) above solids4foam's level 3 and Ff is 1.8% and
   1.0% below it. Fc − Ff falls from 0.110 to 0.059 N (0.2) and from 0.179 to 0.091 N (0.3). Both
   estimates fall from level 0 to level 1, Fc by 5.3–5.5% and Ff by 1.9–2.3%, so neither is converged at
-  level 1 and Kratos brackets F_x rather than fixing it.
+  level 1, and Fc and Ff give a spread for F_x rather than a value.
 - **Other components.** Fc_y agrees with solids4foam's level-3 F_y to 0.1% (0.2) and 0.6% (0.3). Ff_y
   does not (0.051 against 0.105 N at 0.2, 0.245 against 0.346 N at 0.3), although it moves towards it
   from level 0 (0.026 and 0.202 N). F_y is a small net of opposing parts, so the slower convergence of
@@ -200,7 +201,7 @@ python scripts/plot_beam.py --runs runs --s4f ../beam_richter --out figures
 - The fluid stabilisation (QSVMS) and the tetrahedral fluid mesh are numerical choices that differ from
   solids4foam. The plate is the same block mesh with finite elements instead of finite volumes.
 - The two force estimates differ by 4.5% (0.2) and 3.8% (0.3) at level 1, so F_x from Kratos is a
-  bracket rather than a value.
+  spread rather than a value.
 - The workstation showed memory errors on 10 November (ECC is disabled), with Kratos crashes between
   22:26 and 22:48 UTC. A pattern test after the restart on 11 November found no errors in 40 GB. The
   level-0 runs before and after the restart are identical; the level-1 runs, run after the restart, were
