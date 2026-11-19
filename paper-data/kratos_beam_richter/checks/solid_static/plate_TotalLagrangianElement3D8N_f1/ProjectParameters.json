@@ -1,0 +1,103 @@
+{
+  "problem_data": {
+    "problem_name": "plate",
+    "parallel_type": "OpenMP",
+    "echo_level": 0,
+    "start_time": 0.0,
+    "end_time": 1.0
+  },
+  "solver_settings": {
+    "solver_type": "Static",
+    "model_part_name": "Structure",
+    "domain_size": 3,
+    "echo_level": 0,
+    "analysis_type": "non_linear",
+    "model_import_settings": {
+      "input_type": "mdpa",
+      "input_filename": "beam_structure"
+    },
+    "material_import_settings": {
+      "materials_filename": "StructuralMaterials.json"
+    },
+    "time_stepping": {
+      "time_step": 1.0
+    },
+    "rotation_dofs": false,
+    "convergence_criterion": "residual_criterion",
+    "residual_relative_tolerance": 1e-10,
+    "residual_absolute_tolerance": 1e-12,
+    "max_iteration": 20
+  },
+  "processes": {
+    "constraints_process_list": [
+      {
+        "python_module": "assign_vector_variable_process",
+        "kratos_module": "KratosMultiphysics",
+        "process_name": "AssignVectorVariableProcess",
+        "Parameters": {
+          "model_part_name": "Structure.Clamped",
+          "variable_name": "DISPLACEMENT",
+          "constrained": [
+            true,
+            true,
+            true
+          ],
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interval": [
+            0.0,
+            "End"
+          ]
+        }
+      },
+      {
+        "python_module": "assign_vector_variable_process",
+        "kratos_module": "KratosMultiphysics",
+        "process_name": "AssignVectorVariableProcess",
+        "Parameters": {
+          "model_part_name": "Structure.Symmetry",
+          "variable_name": "DISPLACEMENT",
+          "constrained": [
+            false,
+            false,
+            true
+          ],
+          "value": [
+            null,
+            null,
+            0.0
+          ],
+          "interval": [
+            0.0,
+            "End"
+          ]
+        }
+      }
+    ],
+    "loads_process_list": [
+      {
+        "python_module": "assign_vector_by_direction_to_condition_process",
+        "kratos_module": "KratosMultiphysics",
+        "process_name": "AssignVectorByDirectionToConditionProcess",
+        "Parameters": {
+          "model_part_name": "Structure.StructureInterface",
+          "variable_name": "SURFACE_LOAD",
+          "modulus": 100.0,
+          "direction": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "interval": [
+            0.0,
+            "End"
+          ]
+        }
+      }
+    ]
+  },
+  "output_processes": {}
+}

@@ -1,0 +1,8 @@
+input_set=/home/cloner0110/raid/kratos/cases/beamInCrossFlow/inputs/gen/f1_U0.2_dt0.1
+threads=1
+start=2026-11-11T15:31:49Z
+load_before=0.17 0.05 0.01
+end=2026-11-11T15:55:18Z
+load_after=12.08 11.94 9.38
+exit=0
+max_iterations_warnings=0
