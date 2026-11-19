@@ -7,6 +7,7 @@ This is an independent-code solution of the steady cavityFlexibleBottom problem 
 These results were computed **blind** and posted to #36 before any comparison (comment of 16 November 2026, https://github.com/philipcardiff/paper-fsi-verification/issues/36#issuecomment-6928621052).
 - The case definition comes only from the solids4foam tutorial `tutorials/fluidSolidInteraction/cavityFlexibleBottom` at `development` commit `1b5ab09` (`1b5ab0963c847cd9a6d64937f0397434d7b054ef`): the description and geometry in its README, and its case files (`system/`, `constant/`, `0/`).
 - Not consulted before the numbers were posted: the tutorial's `verification/` directory, its result plots and gnuplot scripts, the README's results/literature/verification sections, the paper's cavity section, the cavity folders in `paper-data/`, `simulationData/`, and the ANSYS/COMSOL results.
+- The references were opened only after the solids4foam sequence was shared on #36 (19 November 2026, https://github.com/philipcardiff/paper-fsi-verification/issues/36#issuecomment-7015729752). No run, setting or value in this package was changed afterwards; the comparison section and `scripts/compare_references.py` are the only additions.
 
 ## Platform
 
@@ -131,9 +132,32 @@ From `scripts/cost_table.py logs/<run> ...`:
 
 Core-hours count all allocated cores; CalculiX is serial and mostly waits for SU2. The cost is almost all SU2 inner iterations. The first window takes 15 coupling iterations; from the seventh window on every window converges in one (one window with three at L8).
 
-## Comparison with references (to be added)
+## Comparison with the other solutions
 
-*Placeholder.* The comparison with the paper's cavityFlexibleBottom references (solids4foam, the monolithic data, COMSOL/ANSYS and Tuković et al. 2018) will be added here once the reference values have been shared on #36. Nothing in this README was compared with any reference.
+Made after the blind values above were posted (`scripts/compare_references.py`; `comparison/reference_limits.csv`, `comparison/reference_comparison.csv`). Sources:
+- **solids4foam partitioned:** St Venant–Kirchhoff, strict coupling test, Δt halved per level, as posted on #36 (`comparison/s4f_partitioned_issue36.csv`);
+- **solids4foam quasi-monolithic:** the #618 and #597 builds (`../cavity_monolithic_618/`);
+- **FEniCSx monolithic:** `../fenicsx_cavityflexiblebottom/data/coupled_levels.csv`. Its README describes it as a second implementation by the same group, not an independent one;
+- **Tuković et al. 2018, ANSYS, COMSOL:** the paper's reference levels (`../cavity_plate_material_law/reference_levels.csv`).
+
+Each limit is the Richardson value of the sequence's three finest levels (ours: L4–L8–L16). Differences are reference / ours − 1:
+
+| Solution | u_y(A) limit (m) | order | vs ours | F_y limit (N/m) | order | vs ours |
+|---|---:|---:|---:|---:|---:|---:|
+| SU2 + CalculiX (this package) | −0.240559 | 1.14 | | −5.257784 | 3.07 | |
+| solids4foam quasi-monolithic #618 | −0.240580 | 2.00 | +0.009 % | −5.257741 | 2.08 | −0.001 % |
+| solids4foam quasi-monolithic #597 | −0.240581 | 2.00 | +0.009 % | −5.257746 | 2.11 | −0.001 % |
+| FEniCSx monolithic | −0.240544 | 1.28 | −0.006 % | −5.257801 | 2.18 | +0.000 % |
+| solids4foam partitioned (#36) | −0.240671 | 2.02 | +0.046 % | −5.260619 | 2.33 | +0.054 % |
+| Tuković et al. 2018 | −0.251033 | 1.84 | +4.35 % | −5.256744 | 1.92 | −0.020 % |
+| ANSYS | −0.253638 | 0.89 | +5.44 % | −5.271895 | 1.30 | +0.27 % |
+| COMSOL | not monotone | | | not monotone | | |
+
+- **Monolithic solutions:** this partitioned solution agrees with both solids4foam quasi-monolithic builds and with FEniCSx to within 0.01 % in u_y and 0.001 % in F_y. That is within our u_y GCI (0.046 %) and close to our F_y GCI (0.001 %).
+- **solids4foam partitioned:** the difference is 0.05 % in both quantities. In u_y this is within either sequence's uncertainty. In F_y it is larger than our GCI (0.001 %) and than the sequence's own GCI on its finest level (about 0.02 %, with a safety factor of 1.25), while the other three limits agree with each other to 0.001 %.
+- **Approach to the limit:** at the same Δx the solids4foam sequences converge from below at second order. Their u_y(A) at Δx = 0.1 m is 15 % smaller than ours, and 0.10–0.16 % smaller at Δx = 0.0125 m. Our u_y is already within 0.1 % of its limit at L1, but it is not monotone (see the mesh study). FEniCSx's u_y is within 0.75 % of ours at every level. A likely reason is that both solid discretisations represent bending well on coarse meshes: C3D8I incompatible modes here, quadratic (P2) elements in FEniCSx.
+- **COMSOL:** its finest values (Δx = 0.0125 m) are 1.1 % (u_y) and 0.7 % (F_y) above ours in magnitude, and its sequence is not monotone. Five solutions (two solids4foam quasi-monolithic builds, FEniCSx, this package and the solids4foam partitioned sequence) agree to within about 0.05 %, which places the COMSOL difference with COMSOL.
+- **Tuković et al. 2018 and ANSYS:** they differ by 4–5 % in u_y and agree with ours in F_y to 0.02 % (Tuković) and 0.27 % (ANSYS). This repository already discusses those differences and they are not examined further here.
 
 ## Notes
 
@@ -150,11 +174,12 @@ Core-hours count all allocated cores; CalculiX is serial and mostly waits for SU
 - `histories/L*.csv`: u_x(A), u_y(A), F_x, F_y per window for the Δt = 100 s runs; `histories/dt-check/*.csv`: the same for the time-step check runs.
 - `dt-check/`: `dt_check.csv` and `evaluate.txt` (all runs), `dt_table.md` (the two tables above).
 - `checks/rigid_plate_steady.csv`, `.txt`: the rigid-plate steady sequence.
+- `comparison/`: `reference_limits.csv` and `reference_comparison.csv` (`scripts/compare_references.py`), and `s4f_partitioned_issue36.csv`, the solids4foam partitioned sequence as posted on #36.
 - `case/`: the template: SU2 `steady_rigid.cfg` and `coupled.cfg`, CalculiX `plate.inp` and `config.yml`, `precice-config.base.xml`, and the tutorial fluid blockMeshDict. The `@…@` placeholders, meshes and inlet profile are filled in by `scripts/setup_case.py`.
 - `scripts/`:
   - `setup_case.py`: generates a case for a level (fluid mesh with `make_fluid_mesh.py`, inlet profile with `make_inlet_profile.py`, solid mesh with `solid_mesh.py`). It regenerates the L1 and L2 cases used here byte for byte (meshes, configuration files, inlet profile, solid mesh).
   - `run-case.sh`: Slurm batch script, the FSI1 one with only names and comments changed: stage 1 (steady rigid plate), stage 2 (coupled), timing, hang guard and progress watchdog. `run-steady.sh`: stage 1 alone (the rigid-plate check).
-  - `evaluate_coupled.py`, `study_table.py`, `dt_table.py`, `cost_table.py`: the evaluation; `evaluate_rigid.py`: the rigid-plate table (needs the full stage-1 output); `check_su2_mesh.py`: mesh check.
+  - `evaluate_coupled.py`, `study_table.py`, `dt_table.py`, `cost_table.py`: the evaluation; `compare_references.py`: the comparison with the other solutions; `evaluate_rigid.py`: the rigid-plate table (needs the full stage-1 output); `check_su2_mesh.py`: mesh check.
   - `env-su2-precice.sh`: the environment (as `../fsi1_su2_calculix`; the SU2 build fix is `../fsi1_su2_calculix/scripts/su2-7.5.1-cstdint.patch`).
 - `logs/<run>/`: for each run the Slurm output (`slurm.out`), case summary, exit statuses, wall-clock times, the SU2 coupled history (`fluid-su2/history_00002.csv`), the preCICE coupling-iteration, convergence and point-A watch-point logs, CalculiX's `plate.dat` (`*NODE PRINT` at A), and the last lines of the solver logs. The layout mirrors a case folder, so `evaluate_coupled.py logs/<run>` reproduces the tables. The repository `.gitignore` excludes `*.out` and `*.log`, so these files were added with `git add -f`. Full solver logs and field data are available on request.
 
@@ -172,4 +197,5 @@ and for the tables from the files here:
 python3 scripts/evaluate_coupled.py logs/L1 logs/L2 logs/L4 logs/L8 logs/L16 --csv cavity_su2_steady.csv --hist-dir histories --tail 10
 python3 scripts/study_table.py cavity_su2_steady.csv
 python3 scripts/dt_table.py dt-check/dt_check.csv histories
+python3 scripts/compare_references.py
 ```
